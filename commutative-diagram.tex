@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{tikz-cd}
+\begin{document}
+\begin{equation}
+\begin{tikzcd}[swap]
+	W_1 \arrow[Rightarrow]{rr}[swap]{\mathcal{T}} 
+	\arrow{d}{\rho_1}
+	\arrow[Rightarrow, swap]{dr}{\mathcal{T}}
+	& & W_2' \arrow{d}{\rho_2} 
+	\arrow[equal]{dl}{\sim} \\
+	v_1 \arrow{dr}{\mathcal{T}^*} \arrow[dashed]{rr}{\hspace*{-10ex}\mathcal{T}^*}
+	& W_2 \arrow{d}{\rho_2}
+	& v_2' \arrow[equal, swap]{dl}{\sim} \\
+	& v_2 &
+%	 \arrow[Rightarrow]{r}[inner sep = 1ex]{\mathcal{B}_T} 
+%	\arrow{d}{\mathcal{B}'_X}
+%	& F(x) \arrow{d}[swap]{\mathcal{B}_X}{\exists} \\  
+%   t \arrow{r}[swap]{\exists}{\mathcal{B}_T} \arrow[dashed,dash]{ur}
+%	& A
+\end{tikzcd}
+\end{equation}
+
+\begin{equation}
+\begin{tikzcd}[swap]
+\mbox{Word}_1 \arrow{rr}[swap]{\mathcal{T}} 
+\arrow{dd}{\rho_1}
+\arrow[swap]{dr}{\mathcal{T}}
+& & \mbox{Word}_2' \arrow{dd}{\rho_2} 
+\arrow[-, dashed]{dl}{\sim} \\
+& \mbox{Word}_2  & \\
+\vec{v}_1 \arrow{dr}{\mathcal{T}^*} \arrow[dashed]{rr}[swap]{\hspace*{-10ex}\mathcal{T}^*}
+& & \vec{v}_2' \arrow[-, dashed, swap]{dl}{\sim} \\
+& \vec{v}_2 \arrow[leftarrow, crossing over, pos=0.75]{uu}{\rho_2} &
+%	 \arrow[Rightarrow]{r}[inner sep = 1ex]{\mathcal{B}_T} 
+%	\arrow{d}{\mathcal{B}'_X}
+%	& F(x) \arrow{d}[swap]{\mathcal{B}_X}{\exists} \\  
+%   t \arrow{r}[swap]{\exists}{\mathcal{B}_T} \arrow[dashed,dash]{ur}
+%	& A
+\end{tikzcd}
+\end{equation}
+\end{document}
