@@ -13,7 +13,7 @@
 \newtheorem{theorem}{Theorem}
 
 \ifdefined\chinchin
-\usepackage{xeCJK}
+\usepackage[CJKspace]{xeCJK}
 \setCJKmainfont[BoldFont=SimHei,ItalicFont=AR PL KaitiM GB]{SimSun}
 \newcommand{\cc}[2]{#1}
 \else
@@ -39,7 +39,7 @@
 
 Unification algorithm（同一化算法）是 谓词逻辑 推导的核心算法。  将这个算法加进 命题逻辑 的推导算法（它叫消解法，resolution），就可以得到 谓词逻辑 的推导算法。  换句话说： unification + resolution = first-order deduction.
 
-Unify 的意思是： 将两个 \textbf{逻辑项}，透过 \textbf{variable substitution} 变成「一样」。  Variable substitution 是 谓词逻辑 的本质，\textbf{量词} $\forall$ 和 $\exists$ 就是作用在这些变量上。  所有初中生都懂得如何做「变量代入」，但它其实是一个很麻烦的动作，没有了它，谓词逻辑就变成命题逻辑。  虽然所有数学家都知道什么是 variable substitution，但它的精确描述，到了 1920-30 年代才开始出现。 例如 Sch\"{o}nfinkel 和 Curry 创造了 combinatory logic，Church 创造了 $\lambda$-calculus），他们的目的之一就是揭示「代入」的机制。 
+Unify 的意思是： 将两个 \textbf{逻辑项}，透过 \textbf{variable substitution} 变成「一样」。  Variable substitution 是 谓词逻辑 的本质，\textbf{量词} $\forall$ 和 $\exists$ 就是作用在这些变量上。  所有初中生都懂得如何做「变量代入」，但它其实是一个很麻烦的动作，没有了它，谓词逻辑 就变成 命题逻辑。  虽然所有数学家都知道什么是 variable substitution，但它的精确描述，到了 1920-30 年代才开始出现。 例如 Sch\"{o}nfinkel 和 Curry 创造了 combinatory logic，Church 创造了 $\lambda$-calculus），他们的目的之一就是揭示「代入」的机制。 
 
 Unification 的例子：
 \begin{equation}
