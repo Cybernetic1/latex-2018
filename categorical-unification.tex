@@ -7,6 +7,8 @@
 \usepackage{tikz-cd}		% commutative diagrams
 \usepackage{tikz}
 \usepackage{amsthm}
+\usepackage[backend=biber,bibstyle=authoryear,citestyle=authoryear]{biblatex}
+\bibliography{../AGI-book}
 
 \newtheorem{theorem}{Theorem}
 
@@ -195,7 +197,7 @@ I \ar[r,shift left=.75ex,"f"]
 \end{equation}
 where $f(i) = s_i, g(i) = t_i$.  换句话说 $f$ 和 $g$ 分别指向 \uline{等式的左右两端}。
 
-基於范畴论的算法的特点是： \uline{将函数 recursively \textbf{分拆} 成更细小的函数来计算}。 
+基於范畴论的算法的特点是： \uline{将函数 recursively }{\textbf{\uline{分拆}}\uline{ 成更细小的函数来计算}。 
 
 \begin{theorem}
 If $q: X \rightarrow Q$ is the co-equalizer of the parallel pair:
@@ -232,12 +234,21 @@ I + I' \arrow[shift left=.75ex]{r}{[f, f']}
 \end{equation}
 则分拆成两条 equations：
 \begin{eqnarray}
-X &=& \mbox{john} \\
+X &=& \mbox{john} \nonumber \\
 Y &=& \mbox{mary}
 \end{eqnarray}
 
 另外还有一个 theorem 将 term 分拆出 \textbf{sub-term}，在书里有解释，从略。 
 
+\section*{结论}
 
+知道了 unification 的结构之后或许会更容易将 神经网络 应用到逻辑上，虽然仍未有具体想法。  其实，如果沿用 first-order logic 的 syntax，则整个系统完全和经典的 symbolic AI 没有分别，神经网络好像多此一举。  所以，要真正能发挥到神经网络的功能，必需使用所谓「\textbf{分布式知识表述}，distributive representations」。  这是我现时思考的方向。
+
+\nocite{Rydeheard1988}
+\nocite{Awodey2006}
+\nocite{Simmons2011}
+\nocite{Goguen1989}
+\nocite{Robinson1965}
+\printbibliography
 
 \end{document}
