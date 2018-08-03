@@ -1,0 +1,53 @@
+\documentclass[12pt, orivec]{article}
+\usepackage{amsmath}
+\usepackage{wasysym}
+
+\ifdefined\chinchin
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=SimHei,ItalicFont=AR PL KaitiM GB]{SimSun}
+\newcommand{\cc}[2]{#1}
+\else
+\newcommand{\cc}[2]{#2}
+\fi
+
+\begin{document}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.8ex plus0.8ex minus0.8ex}
+
+例子：「如果 a 爱 b，而且 b 爱 a，则 a 开心」
+
+这是 first-order formula:
+\begin{equation}
+a \heartsuit b \wedge b \heartsuit a \rightarrow \smiley a	
+\end{equation}
+改成 prefix notation：
+\begin{equation}
+\heartsuit a b \wedge \heartsuit b a \rightarrow \smiley a	
+\end{equation}
+应用以下的 combinators：
+\begin{eqnarray}
+& \mathsf{K} x y & \rightarrow x \\
+& \mathsf{C} x y z & \rightarrow x z y
+\end{eqnarray}
+改写成这样：
+\begin{equation}
+\heartsuit a b \wedge \mathsf{C} \heartsuit a b \rightarrow \smiley \mathsf{K} a b
+\end{equation}
+再可以写成\textbf{不带变量}的形式：
+\begin{equation}
+\label{eqn-with-combinators}
+\heartsuit \wedge \mathsf{C} \heartsuit \rightarrow \smiley \mathsf{K}
+\end{equation}
+
+但如果 given 的是以下的两个命题：
+\begin{eqnarray}
+\heartsuit \mbox{ a b} \label{example-1} \\
+\heartsuit \mbox{ b a} \label{example-2}
+\end{eqnarray}
+我不知如何在 algorithm 里应用 (\ref{eqn-with-combinators}) 式。 似乎需要将 (\ref{example-1}) 式 和 (\ref{eqn-with-combinators}) 式 做 pattern matching / unification。  Unification 的结果是将 (\ref{eqn-with-combinators}) 式从右边乘以 \mbox{a b}，然后发现它的第二个 conjunct 可以和 (\ref{example-2}) 式  unify。 
+
+据说 combinators 的最大优点就是它消除了 variable binding 的麻烦，但在这例子中，几乎看不到它的优点。  似乎主要的麻烦是 variable substitution，即使没有 bound variables 仍然是麻烦....?
+
+或者这个例子有更好的处理方法（使用 combinators 的）？
+
+\end{document}

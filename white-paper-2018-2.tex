@@ -318,6 +318,14 @@ And then perhaps we can use a \textbf{genetic algorithm} to evolve these vertice
 Learning is simply the application of \textbf{deep reinforcement learning}, via the \textbf{Bellman update}.  Training requires rewards and punishment information from a teacher or training data set.  This is a well-researched topic, for example there is an online course on DRL from UC Berkeley.
 }
 
+在强化学习中有两个不同的概念，分别对应於我们架构内的：
+\begin{equation}
+\begin{alignedat}{4}
+	\mbox{explore 不同的 actions} \quad &\leftrightsquigarrow& \quad \mbox{逻辑命题的 form} \quad &\leftrightsquigarrow& \quad \mbox{改变 micro-NN regions 的形状} \\
+	\mbox{reinforce 某 action} \quad &\leftrightsquigarrow& \quad \mbox{逻辑命题的 strength} \quad &\leftrightsquigarrow& \quad \mbox{改变 macro-NN 的 weights} 
+\end{alignedat}
+\end{equation}
+
 \cc{
 Credit assignment 问题：  奖与罚并不是做每一个逻辑推导即时获得的，它可能出现在一连串的 inference chain 之后，这 inference chain 其实就是 强化学习里面的 \textbf{eligibility trace} 概念。  换句话说，整条 \textbf{逻辑推导链}，同时获得奖励和惩罚（也就是将那些「有责任的」 weights 增强／减弱）。  All the weights in the NN can be re-normalized periodically.}{
 The \textbf{credit assignment} problem:  rewards and punishment is not instantly received after a single inference step, but may appear after a long \textbf{inference chain}.  This inference chain plays the same role as the \textbf{eligibility trace} in reinforcement learning.  In other words, the entire chain needs to be rewarded or punished during learning (in other words, increase or decrease the weights that were \textbf{responsible} in the inference chain).  All the weights in the NN can be re-normalized periodically.
@@ -345,6 +353,21 @@ The equation for one layer of RNN is:
 x_{n+1} = \sigmoid (W x + H x)
 \end{equation}
 \end{comment}
+
+\appendix
+\section*{Appendices}
+\addcontentsline{toc}{section}{Appendices}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+
+\subsection{Inference chains}
+
+（图中没有表示 micro-NN 的作用）：
+\begin{equation}
+	\vcenter{\hbox{\includegraphics[scale=0.6]{inference-chain.png}}}
+\end{equation}
+
+
+\subsection{Micro-NNs}
 
 \section*{Acknowledgements}
 
