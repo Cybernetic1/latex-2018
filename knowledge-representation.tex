@@ -132,17 +132,17 @@ Distributive 的意思是： 假设有一个 vector 表示神经网络的输出�
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{white-cat-chase-black-cat.png}}}
 \end{equation}
-「猫」的概念需要出现 \textbf{两次}，但神经网络内对应於「猫」的特徵只有 \textbf{一组}（除非有两个重复的可以表示任何概念的 modules，但很浪费）。 换句话说，现时的 CNN 没有「巡迴 (traverse)」视野域的能力； \uline{它不能辨别和描述物体之间的关系}。要做到这一点，除了需要表述 \textbf{概念} 之外，还要表述概念之间的 \textbf{关系}。 我很难想像一个 ``monolithic'' neural module 怎样可以做到这功能。 似乎必须将命题表述成一连串 概念 的 \textbf{时间序列} (time sequence)。
+「猫」的概念需要出现 \textbf{两次}，但神经网络内对应於「猫」的特徵只有 \textbf{一组}（除非有两个重复的可以表示任何概念的 modules，但很浪费）。 换句话说，现时的 CNN 没有「巡迴 (traverse)」视野域的能力； \uline{它不能辨别和描述物体之间的 }\textbf{\uline{关系}}。  我很难想像一个 ``monolithic'' neural module 怎样可以做到这功能。 似乎必须将命题表述成一连串 概念 的 \textbf{时间序列} (time sequence)。
 
 考虑上节讲过的 逻辑 rule（``失恋则不开心''）：
 \begin{equation}
 \forall x,y. \; x \heartsuit y \wedge \neg y \heartsuit x \rightarrow \frownie{} x
 \end{equation}
-这个 rule 的 \textbf{前件} (antecedent) 要成立，必须 \uline{两次出现的 $x$ 相等、两次出现的 $y$ 相等}：
+这个 rule 的 \textbf{前件} (antecedent) 要成立，必须 \uline{两次出现的 $x$ }\textbf{\uline{相等}}\uline{、两次出现的 $y$ }\textbf{\uline{相等}}：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.6]{antecedents-equal.png}}}
 \end{equation}
-而且，要产生正确的 \textbf{后件} (consequent)，需要从前件中 \textbf{copy} $x$ 过来：
+而且，要产生正确的 \textbf{后件} (consequent)，需要从前件中将 $x$ \textbf{copy} 过来：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.6]{consequent-copy.png}}}
 \end{equation}
@@ -154,17 +154,31 @@ Distributive 的意思是： 假设有一个 vector 表示神经网络的输出�
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{carousel-of-vectors.png}}}
 \end{equation}
-但仍未解决 compare 和 copy 的问题。 总之，明显地很麻烦。  这令我想到 \uline{放弃用 neural network 直接处理逻辑，而是用 hybrid 的 神经／逻辑 混合}： 视觉神经用 deep neural network，到高层次转用符号逻辑表述，后者用 genetic algorithm 做学习....
+但仍未解决 compare 和 copy 的问题。 总之，明显地很麻烦。
+
+\section{Graph neural networks}
+
+
+
 
 \section{Genetic algorithm}
 
+这令我想到 \uline{放弃用 neural network 直接处理逻辑，而是用 hybrid 的 神经／逻辑 混合}： 视觉神经用 deep neural network，到高层次转用符号逻辑表述，后者用 genetic algorithm 做学习....
+
+首先有个 logic-based rule engine，它负责 forward-chaining（正向逻辑推导），这完全是经典 AI 范围。 
+
+馀下的问题是要学习那些 rules，这就是 genetic algorithm 做的。 
+
+它的 population 是由个别的 rules 组成，但 winner 并不是单一条 rule，而是一整套 rules（最高分的N个）。 这叫 cooperative co-evolution（COCO）。  
+
+输入和输出是 logic formulas，其实更易处理。 
+
+整个系统仍然是基於 reinforcement learning 的，但不需要直接做 RL，因为那些 rules 其实就是 actions，每一条 rule  的 probabilistic strength 就像 Q-learning 的作用。 
 
 
 \section{Categorical semantics}
 
 Categorical semantics 是用 category theory 表达的 model theory。  以下内容主要来自 \parencite{Caramello2018} 这本新书的第一章。  更经典的参考书是 \parencite{Goldblatt2006}. 
-
-
 
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{logical-categories.png}}}
