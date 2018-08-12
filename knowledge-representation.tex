@@ -23,8 +23,17 @@
 \newcommand{\code}   [1]{{\footnotesize{\ttfamily #1}}}
 \newcommand{\tab}{\hspace*{2cm}}
 \newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcommand{\Chi}{\raisebox{2.5pt}{$\chi$}}
 \newcommand*\KB{\vcenter{\hbox{\includegraphics{../KB-symbol.png}}}}
 \newcommand*\NewSym[1]{\vcenter{\hbox{\includegraphics[scale=0.5]{#1}}}}
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+\newcommand{\Dfrac}[2]{%
+\ooalign{%
+      $\genfrac{}{}{2.9pt}0{\hphantom{#1}}{\hphantom{#2}}$\cr%
+      $\color{white}\genfrac{}{}{1.5pt}0{\hphantom{#1}}{\hphantom{#2}}$\cr%
+      $\color{white}\genfrac{}{}{1pt}0{\color{black}#1}{\color{black}#2}$}}
 
 \title{人工智能的知识表述}
 \author{甄景贤}
@@ -34,6 +43,10 @@
 \setlength{\parskip}{2.8ex plus0.8ex minus0.8ex}
 
 \maketitle
+
+\begin{abstract}
+目前（2018 年8月）强人工智能的发展，问题已经不再是「能不能做到」，而是到了「哪个方案比较好」的地步。 本文介绍知识表述的理论，顺带提出两个方案： A）使用基因算法，上层经典逻辑 + 底层视觉神经网络； B）整个系统用神经网络作用在 graph 记忆体上。
+\end{abstract}
 
 \section{什么是 model theory？}
 
@@ -59,7 +72,7 @@ $\mbox{John} \in \mbox{Male}, \quad \mbox{John, Mary} \in \mbox{Mathematician}$�
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.6]{FOL-model-3.png}}} 
 \end{equation}
-但这种 graph 不是数学中最常见的那种，因为它的 \textbf{边} 有 \textbf{labels}。 
+这是一个 \textbf{directed multi-graph}，或者叫 \textbf{quiver}。  Quivers 是 代数表示论 (representation theory) 中的重要结构。  Quivers 的范畴 $\mathcal{Q}$ 是一个 \textbf{topos}（这在会 \S\ref{Categorical-semantics} 介绍），基本意思是 \uline{它有条件做 first-order logic 的 }\textbf{\uline{模型}}\uline{范畴}。 \footnote{严格来说，hyper-graph 不是 topos，multi-graph 也不是 topos，但当它们变成 directed 则可以。}
 
 以上的 knowledge graph 可以简单地转换成 \textbf{逻辑式子} 的集合：
 \footnotesize
@@ -74,7 +87,7 @@ $\mbox{John} \in \mbox{Male}, \quad \mbox{John, Mary} \in \mbox{Mathematician}$�
 \label{FOL-model}
 \end{equation}
 \normalsize
-所以说，逻辑 与 graph 基本上是 \textbf{等价} 的。
+所以说，\uline{逻辑 与 graph 基本上是 }\textbf{\uline{等价}}\uline{的}。
 
 \begin{tcolorbox}[breakable]
 如果 graph 的每条 边 可以包含任意个 顶点，则有 \textbf{hyper-graph}。 换句话说，hypergraph 的每条 边 $\in \powerset(V)$，$V$ 是 顶点集。 也可以说，hypergraph 就是 V 的 \textbf{子集系统} (set system)。  对逻辑来说，这好处是： \uline{关系 之上可以有 关系}。  
@@ -104,7 +117,7 @@ Hypergraph 可以一一对应於拓扑学上的 \textbf{simplicial complex}，�
 \end{equation}
 虽然，在 \textbf{日常智能} (common-sense intelligence) 中，似乎比较少出现这种无穷的结构，而更多是 ``shallow'' 的结构。 
 
-值得注意的是，经典逻辑人工智能 (classical logic-based AI) 的知识表述 是分拆成 \textbf{rules} 和 \textbf{facts} 两部分。 前者是带有 $\forall$ \textbf{变量} 的式子，后者是 ground sentences。  Rules 储存在 $\KB$ 内，facts 储存在 \textbf{working memory} 内。 前者是一个 \textbf{theory}，后者可以看成是一些 \textbf{``partial'' models}。  说 partial 的原因是因为它不代表整个 model。  事实上 model 是非常庞大的东西，不可能储存在物理系统中。  人工智能或大脑只能储存 某种 theories 和部分的 models。  人工智能的关键问题是如何找一种良好的 syntax 结构，令 theory 的学习更快更有效率。 
+值得注意的是，经典逻辑人工智能 (classical logic-based AI) 的知识表述 是分拆成 \textbf{rules} 和 \textbf{facts} 两部分。 前者是带有 $\forall$ \textbf{变量} 的式子，后者是 ground sentences。  Rules 储存在 $\KB$ 内，facts 储存在 \textbf{working memory} 内。 前者是一个 \textbf{theory}，后者可以看成是一些 \textbf{``partial'' models}。  说 partial 的原因是因为它不代表整个 model。  事实上 model 是非常庞大的东西，不可能储存在物理系统中。  人工智能或大脑只能储存 某些 theories 和部分的 models。  人工智能的关键问题是如何找一种良好的 syntax 结构，令 theory 的学习更快、更有效率。 
 
 \section{Distributive representations}
 
@@ -116,11 +129,11 @@ Distributive 的意思是： 假设有一个 vector 表示神经网络的输出�
 \end{equation}
 用 2 进制，每个 $x_i \in \{ 0, 1 \}$，则 $\vec{x}$ 可以分别表示 10 个 ``\textbf{one-hot}'' 的概念。  但如果用 distributive representation，这 10 个 bits 最多可以表达 $2^n = 1024$ 个不同的状态／概念。  所以 distributiveness 可以非常有效地善用神经元。
 
-假设，「遇见美女过马路」。 这个图像经过譬如 CNN 的处理后，可以得到一个 \textbf{分布式知识表述}：
+举例来说，「遇见美女过马路」。 这个图像经过譬如 CNN 的处理后，可以得到一个 \textbf{分布式知识表述}：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{NN-activation-patterns.png}}}
 \end{equation}
-注意那些红点不一定是\textbf{最后}那层的输出。  这是我心目中的图像，比较 general，不是指某个特定的 implementation。  重点是： 「美女过马路」是一个 ``\textbf{neat}'' proposition，但在感知过程中，我们会认得很多细节，例如「裙子、高跟鞋、金发、斑马线、路灯」等。  这些特徵 (features) 构成整个 representation，至少我是这样理解 分布式表述 的。
+注意那些红点不一定是\textbf{最后}那层的输出。  这是我心目中的图像，比较 general，不是指某个特定的 implementation。  重点是： 「美女过马路」是一个 ``\textbf{neat}'' 命题，但在感知过程中，我们会认得很多细节，例如「裙子、高跟鞋、金发、斑马线、路灯」等。  这些特徵 (features) 构成整个 representation，至少我是这样理解 分布式表述 的。
 
 经典逻辑表述是由 命题 构成的，其实 features 也可以看成是命题，例如「高跟鞋」可以看成是「有一只高跟鞋在这位置」的命题。 逻辑上来说：
 \begin{equation}
@@ -132,17 +145,19 @@ Distributive 的意思是： 假设有一个 vector 表示神经网络的输出�
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{white-cat-chase-black-cat.png}}}
 \end{equation}
-「猫」的概念需要出现 \textbf{两次}，但神经网络内对应於「猫」的特徵只有 \textbf{一组}（除非有两个重复的可以表示任何概念的 modules，但很浪费）。 换句话说，现时的 CNN 没有「巡迴 (traverse)」视野域的能力； \uline{它不能辨别和描述物体之间的 }\textbf{\uline{关系}}。  我很难想像一个 ``monolithic'' neural module 怎样可以做到这功能。 似乎必须将命题表述成一连串 概念 的 \textbf{时间序列} (time sequence)。
+「猫」的概念需要出现 \textbf{两次}，但神经网络内对应於「猫」的特徵只有 \textbf{一组}（除非有两个重复的可以表示任何概念的 modules，但很浪费）。 换句话说，现时的 CNN 没有「巡迴 (traverse)」视野域的能力； \uline{它不能辨别和描述物体之间的 }\textbf{\uline{关系}}。  我很难想像一个 ``monolithic'' neural module 怎样可以做到这功能。 似乎必须将命题表述成一连串 概念 的 \textbf{时间序列} (time sequence)，某种 \textbf{短期记忆} (short-term memory)。
+
+\section{为什么 神经网络 做不到 substitutions？}
 
 考虑上节讲过的 逻辑 rule（``失恋则不开心''）：
 \begin{equation}
 \forall x,y. \; x \heartsuit y \wedge \neg y \heartsuit x \rightarrow \frownie{} x
 \end{equation}
-这个 rule 的 \textbf{前件} (antecedent) 要成立，必须 \uline{两次出现的 $x$ }\textbf{\uline{相等}}\uline{、两次出现的 $y$ }\textbf{\uline{相等}}：
+这个 rule 的 \textbf{前件} (antecedent) 要成立，必须 \uline{两次出现的 $a$ }\textbf{\uline{相等}}\uline{、两次出现的 $b$ }\textbf{\uline{相等}}：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.6]{antecedents-equal.png}}}
 \end{equation}
-而且，要产生正确的 \textbf{后件} (consequent)，需要从前件中将 $x$ \textbf{copy} 过来：
+而且，要产生正确的 \textbf{后件} (consequent)，需要从前件中将 $a$ \textbf{copy} 过来：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.6]{consequent-copy.png}}}
 \end{equation}
@@ -150,45 +165,144 @@ Distributive 的意思是： 假设有一个 vector 表示神经网络的输出�
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.6]{monolithic-NN.png}}}
 \end{equation}
+
+基於集合论的\textbf{几何图像}是这样的：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.6]{heart-break.png}}}
+\end{equation}
+$\in$ 很容易用神经网络解决，例如可以定义 $\heartsuit$ 为一个神经网络：
+\begin{equation}
+\heartsuit (\vec{x}) = \begin{cases}
+0 & \vec{x} \notin \mbox{region}\\
+1 & \vec{x} \in \mbox{region}
+\end{cases}
+\end{equation}
+但即使这样，仍然馀下一个 pattern matching 问题：
+\begin{eqnarray}
+\vec{p}_1 = (\tikzmark{a1} \vec{a}, \vec{b} \tikzmark{b1}) &\in& \heartsuit \nonumber \\
+&& \nonumber \\
+\vec{p}_2 = (\tikzmark{b2} \vec{b}, \vec{a} \tikzmark{a2}) &\in& \neg \heartsuit
+\begin{tikzpicture}[overlay,remember picture]
+  \draw[-, red, shorten <=20pt, transform canvas={shift={(-3pt,13pt)}}] (a1.center) to (a2.center);
+  \draw[-, red, shorten <=20pt, transform canvas={shift={(-6pt,13pt)}}] (a1.center) to (a2.center);
+  \draw[-, red, shorten <=20pt, transform canvas={shift={(5pt,13pt)}}] (b1.center) to (b2.center);
+  \draw[-, red, shorten <=20pt, transform canvas={shift={(2pt,13pt)}}] (b1.center) to (b2.center);
+\end{tikzpicture}
+\end{eqnarray}
+
 事实上，要做到以上功能，似乎必需有一个 \textbf{动态的记忆体}，它接收新来的元素时，会对记忆体中其他元素逐一 \textbf{比较}，而且具备 \textbf{复制} 功能。  例如我考虑过一个像「迴转木马」的时间序列机制（每个 $\NewSym{distributive-vector.png}$ 代表一支 distributive vector）：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{carousel-of-vectors.png}}}
 \end{equation}
 但仍未解决 compare 和 copy 的问题。 总之，明显地很麻烦。
 
-\section{Graph neural networks}
-
-
-
-
 \section{Genetic algorithm}
 
-这令我想到 \uline{放弃用 neural network 直接处理逻辑，而是用 hybrid 的 神经／逻辑 混合}： 视觉神经用 deep neural network，到高层次转用符号逻辑表述，后者用 genetic algorithm 做学习....
+这是 plan {\color{red} A}。
 
-首先有个 logic-based rule engine，它负责 forward-chaining（正向逻辑推导），这完全是经典 AI 范围。 
+Substitution 的麻烦令我想到 \uline{放弃用 neural network 直接处理逻辑，而是用 hybrid 的 神经／逻辑 混合}： 视觉神经用 deep neural network，到高层次转用符号逻辑表述，后者用 genetic algorithm 做学习。
 
-馀下的问题是要学习那些 rules，这就是 genetic algorithm 做的。 
+首先需要一个 logic-based \textbf{rule engine}，它负责 forward-chaining（正向逻辑推导），这完全是经典 AI 的范围。 例如 经典的 Soar architecture [Carnegie-Mellon 大学] 就是一个 rule-base 引擎。 还有我这一代的 OpenCog, OpenNARS, 和我写的 Genifer\footnote{Genifer 仍未到达 production stage.}，或许还有更新一代的 AGI 系统（？）  
 
-它的 population 是由个别的 rules 组成，但 winner 并不是单一条 rule，而是一整套 rules（最高分的N个）。 这叫 cooperative co-evolution（COCO）。  
+经典逻辑 AI 的樽颈问题是 \uline{rules 的学习算法太慢}，
+\begin{itemize}
+\item plan A： 继续用经典逻辑引擎，用 genetic algorithm 做学习算法
+\item plan B： 将逻辑记忆映射到向量空间，再用神经网络学习逻辑 rules
+\end{itemize}
+
+基因算法的 population 是由个别的 rules 组成，但 winner 并不是单一条 rule，而是一整套 rules（最高分的 $N$ 个）。 这叫 \textbf{cooperative co-evolution}（COCO）。  
 
 输入和输出是 logic formulas，其实更易处理。 
 
-整个系统仍然是基於 reinforcement learning 的，但不需要直接做 RL，因为那些 rules 其实就是 actions，每一条 rule  的 probabilistic strength 就像 Q-learning 的作用。 
+整个系统仍然是基於 reinforcement learning 的，但不需要直接做 RL，因为那些 rules 其实就是 \textbf{actions}，每条 rule  的 probabilistic strength 就像 $Q$-learning 中 $Q$值的作用。 
 
+\section{Graph neural networks}
+
+这是 plan {\color{red} B}。  
 
 \section{Categorical semantics}
+\label{Categorical-semantics}
 
 Categorical semantics 是用 category theory 表达的 model theory。  以下内容主要来自 \parencite{Caramello2018} 这本新书的第一章。  更经典的参考书是 \parencite{Goldblatt2006}. 
 
+不同的 logics 可以透过 \textbf{proof theory}（它研究的是 \textit{syntactic} rules of deduction）定义：
+\begin{equation}
+\begin{tabular}{|l|l|}
+\hline
+algebraic logic & no additional rules\\
+\hline
+Horn logic & finite $\wedge$ \\
+\hline
+regular logic & finite $\wedge$, $\exists$, Frobenius axiom\\
+\hline
+coherent logic & finite $\wedge$ and $\vee$, $\exists$,\\
+				& distributive axiom, \\
+				& Frobenius axiom \\
+\hline
+geometric logic & finite $\wedge$, infinitary $\vee$, $\exists$,\\
+				& infinitary distribution axiom,\\
+				& Frobenius axiom \\
+\hline
+first-order intuitionistic logic & all finitary rules \\
+				& except law of excluded middle\\
+\hline
+first-order classical logic & all finitary rules \\
+\hline
+\end{tabular}
+\end{equation}
+
+举例来说，\textbf{algebraic theory} 的意思是： 它只有一个 relation $=$，而所有 axioms 都是 $s = t$ 这种形式。 
+
+还有这些 deduction rules 的例子：
+\begin{equation}
+\boxed{\wedge \mbox{ rule}}	\quad \frac{\Phi \vdash \Psi, \; \Phi \vdash \Chi}{\Phi \vdash (\Psi \wedge \Chi)}
+\end{equation}
+\vspace*{-5pt}
+\begin{equation}
+\boxed{\exists \mbox{ double rule}}	\quad \Dfrac{\Phi \vdash_{\vec{x}, y} \Psi}{\exists y \, \Phi \vdash_{\vec{x}} \Psi}
+\end{equation}
+\begin{equation}
+\boxed{\mbox{Frobenius axiom}}	\quad \Phi \wedge \exists y \, \Psi \vdash_{\vec{x}} \exists y \, (\Phi \wedge \Psi)
+\end{equation}
+
+Tarski 的模型论 将 first-order syntax 「对应」到 集合论 的 \textbf{结构} (structures) 上。  由此推广，不同的 逻辑 syntax 对应於不同的 结构范畴：
+\begin{equation}
+\begin{tabular}{|l|l|}
+\hline
+categories with finite products & algebraic logic \\
+\hline
+Cartesian categories			& Cartesian logic \\
+\hline
+regular categories				& regular logic \\
+\hline
+coherent categories				& coherent logic \\
+\hline
+geometric categories			& geometric logic \\
+\hline
+Heyting categories				& first-order intuitionistic logic \\
+\hline
+Boolean coherent categories		& first-order classical logic \\
+\hline
+\end{tabular}
+\end{equation}
+
+``Geometric'' logic 的意思来自 \textbf{geometric morphisms}，它可以粗略地理解为两个 topoi 之间的映射，类似於 \textbf{continuous maps} between topological spaces。 在 1963 年左右，topos 的概念独立地来自几个不同的发源地： Alexander Grothendieck 在代数几何方面发展的 sheaf theory，和 F William Lawvere 用范畴论重新表述集合论，还有 Paul Cohen 的 forcing 理论（后者用来解决 \textbf{连续统假设}）。  Sheaf 的意思是： 在一些 open sets $V_i$ 上定义的物体，它们在 overlap $V_i \cap V_j$ 上是吻合的，即可以 ``collate''。  二战后，Leray，接著 Cartan，用 open sets 的方法定义了 sheaf。 其后 Lazard 用 \'{e}tale 定义 sheaf（基本上是一个 \textbf{functor}），后者是 topos 理论的主要动机。  Grothendieck 将 sheaf 应用在 topology (cohomology)上，而后 Jean-Pierre Serre 发现它也可以用在代数几何上，他们和其他合作者 写了 1623 页的巨著 《SGA IV》，重大影响了代数几何的发展，导致 1974 年 Deligne 解决了 Weyl 猜想。  但我暂时不熟悉代数几何，所以不太清楚 Grothendieck 他们做了什么.... 详细可参看 \parencite{MacLane1992} 一书。
+
+在拓樸空间上，一个 open set $U$ 的 complement 是 closed 而且未必 open，所以如果局限在 open sets 之内，则 $U$ 的 ``negation'' 应该定义为 ``the interior of its complement''.  这导致 $U$ 的「双重否定」不一定等於 $U$，换句话说，\uline{the algebra of open sets follows \textbf{intuitionistic logic}}, such an algebra is called a \textbf{Heyting algebra}.  （参考书同上）
+
+Topoi 之间有两种 morphisms： \textbf{geometric morphisms} 和 \textbf{logical functors}.  前者保持「几何结构」，后者保持逻辑中的 元素 (elementary) 和 type theory，所以有 \textbf{elementary topos} 的定义。 后者的特点是它有 \textbf{sub-object classifier} $\Omega$。 $\Omega$ 是一个特殊的 object，例如 $\{ \top, \bot \}$，代表 \textbf{真 假} 二值。 用 $\Omega$ 可以定义 sub-objects 亦即集合论中的 \textbf{子集} 概念。  举例来说，``Love'' 是一个在 $D \times D$ 内的 \textbf{关系}，$D$ 是所有「人」的集合。  可以将 $D \times D$ 看成是 full relation，则 $\mbox{Love} \subset D \times D$ 是它的\textbf{子集}。  换句话说，这是 elementary topos 可以用来做 relation algebra 或 first-order logic 的 \textbf{模型} 的原因。 （参见 \parencite{Goldblatt2006}）
+
+以下是根据 \parencite{Caramello2018} Ch.1 整理出来的一张关系图，但我暂时还不太熟悉范畴论的概念，所以也不完全理解： 
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{logical-categories.png}}}
 \end{equation}
 
 \section{Domain theory}
 
-$\lambda$-calculus 和 combinatory logic 都是可以表达任意 \textbf{函数} 的形式。 如果全体函数的 domain 是 $D$，而 由 $D \rightarrow D$ 的函数的个数是 $|D^D|$，则根据集合论的 Cantor's theorem，$|D^D|$ 必定大於 $|D|$，即使 $D$ 是无穷依然成立。 换句话说，$\lambda$-calculus 和 combinatory logic 不可能有 models。  这结论是非常令人不安的。 但这个问题被 Dana Scott 和 C Strachey 在 1971 年解决了，开创了 \textbf{domain theory}。
+$\lambda$-calculus 和 combinatory logic 都是可以表达任意 \textbf{函数} 的形式。 如果全体函数的 domain 是 $D$，而 由 $D \rightarrow D$ 的函数的个数是 $|D^D|$，则根据集合论的 Cantor's theorem，$|D^D|$ 必定大於 $|D|$，即使 $D$ 是无穷依然成立。 换句话说，$\lambda$-calculus 和 combinatory logic 不可能有 models。  这结论是非常令人不安的。 但在 1971 年，这个问题被 Dana Scott 和 C Strachey 解决了，开创了 \textbf{domain theory}。
 
-以下内容主要来自 \parencite{Vickers1989}，是一本很易懂的书，还有更新的和更详尽的 \parencite{Goubault-Larrecq2013}.
+以下内容主要来自 \parencite{Vickers1989}，是一本很易懂的书，还有更新和更详尽的 \parencite{Goubault-Larrecq2013}.
+
 
 
 \section{Group theory}

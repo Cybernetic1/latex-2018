@@ -253,6 +253,21 @@
          style="fill:#fc0000;fill-opacity:1;fill-rule:evenodd;stroke:#fc0000;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="matrix(-0.4,0,0,-0.4,-4,0)" />
     </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker2076-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#fc0000;fill-opacity:1;fill-rule:evenodd;stroke:#fc0000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path2074-6" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -263,7 +278,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1"
      inkscape:cx="299"
-     inkscape:cy="765"
+     inkscape:cy="325"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -281,7 +296,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -432,11 +447,11 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="132.24196"
+       x="139.12103"
        y="224.31677"
        id="text42-7-0"><tspan
          sodipodi:role="line"
-         x="132.24196"
+         x="139.12103"
          y="224.31677"
          style="text-align:center;text-anchor:middle;stroke-width:0.26458332"
          id="tspan44-3-2">Grothendieck topos</tspan></text>
@@ -487,11 +502,11 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="74.191353"
+       x="72.074684"
        y="224.26096"
        id="text42-7-0-9"><tspan
          sodipodi:role="line"
-         x="74.191353"
+         x="72.074684"
          y="224.26096"
          style="text-align:center;text-anchor:middle;stroke-width:0.26458332"
          id="tspan44-3-2-2">elementary topos</tspan></text>
@@ -511,6 +526,12 @@
        style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#fc0000;stroke-width:0.31343871;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1333)"
        d="m 74.43448,90.160971 -10e-7,13.523859"
        id="path24-3-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#fc0000;stroke-width:0.31343871;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker2076-3)"
+       d="M 96.690024,222.60788 H 110.21384"
+       id="path24-3-6-1-3-6-7"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
   </g>
