@@ -20,12 +20,14 @@
 \newcommand{\cc}[2]{#2}
 \fi
 
+\setcounter{secnumdepth}{1}		% use numbers in sections only
+
 \newcommand{\code}   [1]{{\footnotesize{\ttfamily #1}}}
 \newcommand{\tab}{\hspace*{2cm}}
 \newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
 \newcommand{\Chi}{\raisebox{2.5pt}{$\chi$}}
 \newcommand*\KB{\vcenter{\hbox{\includegraphics{../KB-symbol.png}}}}
-\newcommand*\NewSym[1]{\vcenter{\hbox{\includegraphics[scale=0.5]{#1}}}}
+\newcommand*\NewSym[2][0.5]{\vcenter{\hbox{\includegraphics[scale=#1]{#2}}}}
 
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
@@ -52,7 +54,7 @@
 
 举例来说，hyperbolic geometry（双曲几何）可以「实现」为某些 \textbf{模型}： 
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.8]{hyperbolic-models.png}}}  \nonumber
+\vcenter{\hbox{\includegraphics[scale=0.7]{hyperbolic-models.png}}}  \nonumber
 \end{equation}
 模型不是唯一的，可以有很多种。
 
@@ -101,7 +103,9 @@ Hypergraph 可以一一对应於拓扑学上的 \textbf{simplicial complex}，�
 \end{equation}
 这个式子含有 universal quantification，所以不是 model 的一部分。 逻辑上来说，只有 \textbf{ground sentences} （没有变量的式子）的集合才可以组成 model，例如 (\ref{FOL-model}) 。 
 
-所以，logic \textbf{theory} 中的一个式子 可以导致 model 中出现很多 \textbf{新的} 顶点和连接。 这是 model theory 研究的问题。
+\subsection{模型空间 的 fractal 结构}
+
+Logic \textbf{theory} 中的一个式子 可以导致 model 中出现很多 \textbf{新的} 顶点和连接。 这是 model theory 研究的问题。  某些情况下，模型空间 会出现「无限细分」的 fractal 结构。
 
 例如，每一个自然数 $n \in \mathbb{N}$ 都有 它的 successor $S(n)$。 这个函数的存在，导致 model 空间里有一系列 \textbf{无穷} 的顶点：
 \begin{equation}
@@ -118,6 +122,60 @@ Hypergraph 可以一一对应於拓扑学上的 \textbf{simplicial complex}，�
 虽然，在 \textbf{日常智能} (common-sense intelligence) 中，似乎比较少出现这种无穷的结构，而更多是 ``shallow'' 的结构。 
 
 值得注意的是，经典逻辑人工智能 (classical logic-based AI) 的知识表述 是分拆成 \textbf{rules} 和 \textbf{facts} 两部分。 前者是带有 $\forall$ \textbf{变量} 的式子，后者是 ground sentences。  Rules 储存在 $\KB$ 内，facts 储存在 \textbf{working memory} 内。 前者是一个 \textbf{theory}，后者可以看成是一些 \textbf{``partial'' models}。  说 partial 的原因是因为它不代表整个 model。  事实上 model 是非常庞大的东西，不可能储存在物理系统中。  人工智能或大脑只能储存 某些 theories 和部分的 models。  人工智能的关键问题是如何找一种良好的 syntax 结构，令 theory 的学习更快、更有效率。 
+
+\section{为什么 神经网络 做不到 substitutions？}
+
+考虑上节讲过的 逻辑 rule（``失恋则不开心''）：
+\begin{equation}
+\forall x,y. \; x \heartsuit y \wedge \neg y \heartsuit x \rightarrow \frownie{} x
+\end{equation}
+这个 rule 的 \textbf{前件} (antecedent) 要成立，必须 \uline{两次出现的 $a$ }\textbf{\uline{相等}}\uline{、两次出现的 $b$ }\textbf{\uline{相等}}：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.6]{antecedents-equal.png}}}
+\end{equation}
+而且，要产生正确的 \textbf{后件} (consequent)，需要从前件中将 $a$ \textbf{copy} 过来：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.6]{consequent-copy.png}}}
+\end{equation}
+\uline{这两个动作（\textbf{compare} 和 \textbf{copy}）都是用神经网络 很难做到的}。  但它们是 variable substitution 的本质，也是 谓词逻辑 麻烦之处。 换句话说，很难用一个 monolithic 的 end-to-end 神经网络 一口气完成这两个动作：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.6]{monolithic-NN.png}}}
+\end{equation}
+
+首先只考虑\textbf{前件}的成立，一种可行的\textbf{几何图像}是这样的：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.6]{heart-break.png}}}
+\end{equation}
+$\in$ 很容易用神经网络解决，例如可以定义 $\heartsuit$ 为一个神经网络：
+\begin{equation}
+\heartsuit (\vec{x}) = \begin{cases}
+0 & \vec{x} \notin \mbox{region}\\
+1 & \vec{x} \in \mbox{region}
+\end{cases}
+\end{equation}
+但即使这样，仍然馀下一个 pattern matching (comparison) 问题：
+\begin{eqnarray}
+\vec{p}_1 = (\tikzmark{a1} \vec{a}, \vec{b} \tikzmark{b1}) &\in& \heartsuit \nonumber \\
+&& \nonumber \\
+\vec{p}_2 = (\tikzmark{b2} \vec{b}, \vec{a} \tikzmark{a2}) &\in& \neg \heartsuit
+\begin{tikzpicture}[overlay,remember picture]
+  \draw[-, red, shorten <=20pt, transform canvas={shift={(-3pt,13pt)}}] (a1.center) to (a2.center);
+  \draw[-, red, shorten <=20pt, transform canvas={shift={(-6pt,13pt)}}] (a1.center) to (a2.center);
+  \draw[-, red, shorten <=20pt, transform canvas={shift={(5pt,13pt)}}] (b1.center) to (b2.center);
+  \draw[-, red, shorten <=20pt, transform canvas={shift={(2pt,13pt)}}] (b1.center) to (b2.center);
+\end{tikzpicture}
+\end{eqnarray}
+这两个 等号 需要的 comparison 是 神经网络 不擅长的。
+
+其次，考虑\textbf{后件}的 copy 问题。 为简单起见，假设逻辑 variable $z$ 对应於 输入向量 $\vec{x}$ 中的某些分量，例如 $x_i$.  Copy 的作用是将 $x_i$ 抄到 $y_j$ 的位置：
+\vspace*{10pt}
+\begin{equation}
+\vec{F}: \; (x_1, ..., {\color{red} x_i} \tikzmark{a}, ... , x_n) \mapsto (y_1, ... , \tikzmark{b} {\color{red} y_j} , ... , y_n)
+\begin{tikzpicture}[overlay,remember picture,out=45,in=135,distance=1.1cm]
+  \draw[->,red,shorten >=7pt,shorten <=7pt] (a.center) to node [auto, above=2pt] {$id$} (b.center);
+\end{tikzpicture}
+\end{equation}
+
 
 \section{Distributive representations}
 
@@ -147,48 +205,33 @@ Distributive 的意思是： 假设有一个 vector 表示神经网络的输出�
 \end{equation}
 「猫」的概念需要出现 \textbf{两次}，但神经网络内对应於「猫」的特徵只有 \textbf{一组}（除非有两个重复的可以表示任何概念的 modules，但很浪费）。 换句话说，现时的 CNN 没有「巡迴 (traverse)」视野域的能力； \uline{它不能辨别和描述物体之间的 }\textbf{\uline{关系}}。  我很难想像一个 ``monolithic'' neural module 怎样可以做到这功能。 似乎必须将命题表述成一连串 概念 的 \textbf{时间序列} (time sequence)，某种 \textbf{短期记忆} (short-term memory)。
 
-\section{为什么 神经网络 做不到 substitutions？}
+通常 model 太大，需要用 attention mechanism 选取它的一个 fragment 「呈示」给 神经网络 处理：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.7]{attentional-mechanism.png}}}
+\end{equation}
+这 attention mechanism 和 现时 深度学习 里面的 attention 或者在具体细节上有些分别，但基本上是同一概念。 
 
-考虑上节讲过的 逻辑 rule（``失恋则不开心''）：
+神经网络的输入 $\vec{x}$，需要这样的一个 embedding：
 \begin{equation}
-\forall x,y. \; x \heartsuit y \wedge \neg y \heartsuit x \rightarrow \frownie{} x
+\boxed{graph} \quad
+\begin{tikzcd}[column sep = large]
+\NewSym[1.5]{../graph-symbol.png} \ar[r, hookrightarrow, "\mbox{embed}"] & (x_1, ..., x_n) 
+\end{tikzcd}
+\quad \boxed{vector}
 \end{equation}
-这个 rule 的 \textbf{前件} (antecedent) 要成立，必须 \uline{两次出现的 $a$ }\textbf{\uline{相等}}\uline{、两次出现的 $b$ }\textbf{\uline{相等}}：
-\begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.6]{antecedents-equal.png}}}
-\end{equation}
-而且，要产生正确的 \textbf{后件} (consequent)，需要从前件中将 $a$ \textbf{copy} 过来：
-\begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.6]{consequent-copy.png}}}
-\end{equation}
-\uline{这两个动作（\textbf{compare} 和 \textbf{copy}）都是用神经网络 很难做到的}。  但它们是 variable substitution 的本质，也是 谓词逻辑 麻烦之处。 换句话说，很难用一个 monolithic 的 end-to-end 神经网络 一口气完成这两个动作：
-\begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.6]{monolithic-NN.png}}}
-\end{equation}
+但 graph 并不是一个「线性」的结构（线性是指符号形式上，例如 tree 可以表示成线性的一行），将 graph 结构表示成一支 vector 似乎颇难（这或许是 graph neural networks 迟迟未有突破的原因）。  
 
-基於集合论的\textbf{几何图像}是这样的：
+一个自然的想法是直接利用 quiver representation，它将 vertex 变成 vector space，edge 变成 linear transformation between vector spaces. 例如：
 \begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.6]{heart-break.png}}}
+\begin{tikzcd}[column sep = large]
+\mbox{John} \arrow[r, bend left, "\heartsuit"] & \arrow[l, bend left, swap, "\neg \heartsuit"] \mbox{Mary}
+\end{tikzcd}
+\quad \Longrightarrow \quad
+\begin{tikzcd}[column sep = large]
+V_1 \arrow[r, bend left, "M_1"] & \arrow[l, bend left, "M_2"] V_2
+\end{tikzcd}
 \end{equation}
-$\in$ 很容易用神经网络解决，例如可以定义 $\heartsuit$ 为一个神经网络：
-\begin{equation}
-\heartsuit (\vec{x}) = \begin{cases}
-0 & \vec{x} \notin \mbox{region}\\
-1 & \vec{x} \in \mbox{region}
-\end{cases}
-\end{equation}
-但即使这样，仍然馀下一个 pattern matching 问题：
-\begin{eqnarray}
-\vec{p}_1 = (\tikzmark{a1} \vec{a}, \vec{b} \tikzmark{b1}) &\in& \heartsuit \nonumber \\
-&& \nonumber \\
-\vec{p}_2 = (\tikzmark{b2} \vec{b}, \vec{a} \tikzmark{a2}) &\in& \neg \heartsuit
-\begin{tikzpicture}[overlay,remember picture]
-  \draw[-, red, shorten <=20pt, transform canvas={shift={(-3pt,13pt)}}] (a1.center) to (a2.center);
-  \draw[-, red, shorten <=20pt, transform canvas={shift={(-6pt,13pt)}}] (a1.center) to (a2.center);
-  \draw[-, red, shorten <=20pt, transform canvas={shift={(5pt,13pt)}}] (b1.center) to (b2.center);
-  \draw[-, red, shorten <=20pt, transform canvas={shift={(2pt,13pt)}}] (b1.center) to (b2.center);
-\end{tikzpicture}
-\end{eqnarray}
+其中 $V_1, V_2$ 是向量空间，$M_1, M_2 \in GL(\mathbb{R})$ 是 矩阵。  但这仍然不是一支向量。  
 
 事实上，要做到以上功能，似乎必需有一个 \textbf{动态的记忆体}，它接收新来的元素时，会对记忆体中其他元素逐一 \textbf{比较}，而且具备 \textbf{复制} 功能。  例如我考虑过一个像「迴转木马」的时间序列机制（每个 $\NewSym{distributive-vector.png}$ 代表一支 distributive vector）：
 \begin{equation}
@@ -218,7 +261,7 @@ Substitution 的麻烦令我想到 \uline{放弃用 neural network 直接处理�
 
 \section{Graph neural networks}
 
-这是 plan {\color{red} B}。  
+这是 plan {\color{red} B}。  很多谢 DeepMind 最近发表的论文： 
 
 \section{Categorical semantics}
 \label{Categorical-semantics}
@@ -303,9 +346,7 @@ $\lambda$-calculus 和 combinatory logic 都是可以表达任意 \textbf{函数
 
 以下内容主要来自 \parencite{Vickers1989}，是一本很易懂的书，还有更新和更详尽的 \parencite{Goubault-Larrecq2013}.
 
-
-
-\section{Group theory}
+Scott 的解决办法是..... 【未完待续】 $\NewSym{../UnderConst.png}$
 
 \printbibliography
 
