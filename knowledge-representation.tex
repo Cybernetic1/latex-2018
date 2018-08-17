@@ -7,6 +7,7 @@
 \usepackage{tikz-cd}		% commutative diagrams
 \usepackage{tikz}
 \usepackage{amsthm}
+\usepackage{enumitem}	% for \itemize custom labels
 \usepackage[backend=biber,bibstyle=authoryear,citestyle=authoryearbrack]{biblatex}
 \bibliography{../AGI-book}
 
@@ -28,6 +29,7 @@
 \newcommand{\Chi}{\raisebox{2.5pt}{$\chi$}}
 \newcommand*\KB{\vcenter{\hbox{\includegraphics{../KB-symbol.png}}}}
 \newcommand*\NewSym[2][0.5]{\vcenter{\hbox{\includegraphics[scale=#1]{#2}}}}
+\newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
 
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
@@ -36,6 +38,9 @@
       $\genfrac{}{}{2.9pt}0{\hphantom{#1}}{\hphantom{#2}}$\cr%
       $\color{white}\genfrac{}{}{1.5pt}0{\hphantom{#1}}{\hphantom{#2}}$\cr%
       $\color{white}\genfrac{}{}{1pt}0{\color{black}#1}{\color{black}#2}$}}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\interfootnotelinepenalty=10000
 
 \title{人工智能的知识表述}
 \author{甄景贤}
@@ -47,7 +52,7 @@
 \maketitle
 
 \begin{abstract}
-目前（2018 年8月）强人工智能的发展，问题已经不再是「能不能做到」，而是到了「哪个方案比较好」的地步。 本文介绍知识表述的理论，顺带提出两个方案： A）使用基因算法，上层经典逻辑 + 底层视觉神经网络； B）整个系统用神经网络作用在 graph 记忆体上。
+目前（2018 年8月）强人工智能的发展，问题已经不再是「能不能做到」，而是到了「哪个方案比较好」的地步。 本文介绍知识表述的理论，顺带提出两个方案，分别基於： A）基因算法； B）深度学习。
 \end{abstract}
 
 \section{什么是 model theory？}
@@ -74,7 +79,7 @@ $\mbox{John} \in \mbox{Male}, \quad \mbox{John, Mary} \in \mbox{Mathematician}$�
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.6]{FOL-model-3.png}}} 
 \end{equation}
-这是一个 \textbf{directed multi-graph}，或者叫 \textbf{quiver}。  Quivers 是 代数表示论 (representation theory) 中的重要结构。  Quivers 的范畴 $\mathcal{Q}$ 是一个 \textbf{topos}（这在会 \S\ref{Categorical-semantics} 介绍），基本意思是 \uline{它有条件做 first-order logic 的 }\textbf{\uline{模型}}\uline{范畴}。 \footnote{严格来说，hyper-graph 不是 topos，multi-graph 也不是 topos，但当它们变成 directed 则可以。}
+这是一个 \textbf{directed multi-graph}，或者叫 \textbf{quiver}。  Quivers 是 代数表示论 (representation theory) 中的重要结构。  Quivers 的范畴 $\mathcal{Q}$ 是一个 \textbf{topos}（这在会 \S\ref{Categorical-semantics} 介绍），基本意思是 \uline{它有条件做 first-order logic 的 }\textbf{\uline{模型}}\uline{范畴}\footnote{根据 \parencite{Grilliette2017} 的说法，hyper-graph 不是 topos，multi-graph 也不是 topos，但当它们变成 directed 则可以。} 。
 
 以上的 knowledge graph 可以简单地转换成 \textbf{逻辑式子} 的集合：
 \footnotesize
@@ -91,7 +96,7 @@ $\mbox{John} \in \mbox{Male}, \quad \mbox{John, Mary} \in \mbox{Mathematician}$�
 \normalsize
 所以说，\uline{逻辑 与 graph 基本上是 }\textbf{\uline{等价}}\uline{的}。
 
-\begin{tcolorbox}[breakable]
+\begin{tcolorbox}[breakable, parbox=false]
 如果 graph 的每条 边 可以包含任意个 顶点，则有 \textbf{hyper-graph}。 换句话说，hypergraph 的每条 边 $\in \powerset(V)$，$V$ 是 顶点集。 也可以说，hypergraph 就是 V 的 \textbf{子集系统} (set system)。  对逻辑来说，这好处是： \uline{关系 之上可以有 关系}。  
 
 Hypergraph 可以一一对应於拓扑学上的 \textbf{simplicial complex}，可以研究它的 homology 和 cohomology。 Simplicial complex 也可以和 \textbf{square-free monomial ideals} 一一对应。 Square-free 的意思是 $x_i$ 的指数只可以是 0 或 1。  后者是 \textbf{组合交换代数} (combinatorial commutative algebra) 的研究范围。  暂时我不知道这些关联有没有用，详细可参看 \parencite{Brown2013}, \parencite{Miller2005}。
@@ -103,9 +108,9 @@ Hypergraph 可以一一对应於拓扑学上的 \textbf{simplicial complex}，�
 \end{equation}
 这个式子含有 universal quantification，所以不是 model 的一部分。 逻辑上来说，只有 \textbf{ground sentences} （没有变量的式子）的集合才可以组成 model，例如 (\ref{FOL-model}) 。 
 
-\subsection{模型空间 的 fractal 结构}
+\section{模型空间 的 fractal 结构}
 
-Logic \textbf{theory} 中的一个式子 可以导致 model 中出现很多 \textbf{新的} 顶点和连接。 这是 model theory 研究的问题。  某些情况下，模型空间 会出现「无限细分」的 fractal 结构。
+Logic \textbf{theory} 中的一个式子 可以导致 model 中出现很多 \textbf{新的} 顶点和连接。 这是 model theory 研究的问题。  某些情况下，模型空间 会出现「无限细分」的 fractal 结构。 
 
 例如，每一个自然数 $n \in \mathbb{N}$ 都有 它的 successor $S(n)$。 这个函数的存在，导致 model 空间里有一系列 \textbf{无穷} 的顶点：
 \begin{equation}
@@ -121,7 +126,70 @@ Logic \textbf{theory} 中的一个式子 可以导致 model 中出现很多 \tex
 \end{equation}
 虽然，在 \textbf{日常智能} (common-sense intelligence) 中，似乎比较少出现这种无穷的结构，而更多是 ``shallow'' 的结构。 
 
-值得注意的是，经典逻辑人工智能 (classical logic-based AI) 的知识表述 是分拆成 \textbf{rules} 和 \textbf{facts} 两部分。 前者是带有 $\forall$ \textbf{变量} 的式子，后者是 ground sentences。  Rules 储存在 $\KB$ 内，facts 储存在 \textbf{working memory} 内。 前者是一个 \textbf{theory}，后者可以看成是一些 \textbf{``partial'' models}。  说 partial 的原因是因为它不代表整个 model。  事实上 model 是非常庞大的东西，不可能储存在物理系统中。  人工智能或大脑只能储存 某些 theories 和部分的 models。  人工智能的关键问题是如何找一种良好的 syntax 结构，令 theory 的学习更快、更有效率。 
+附带一提，经典逻辑人工智能 (classical logic-based AI) 的知识表述 是分拆成 \textbf{rules} 和 \textbf{facts} 两部分。 前者是带有 $\forall$ \textbf{变量} 的式子，后者是 ground sentences。  Rules 储存在 $\KB$ 内，facts 储存在 \textbf{working memory} 内。 前者是一个 \textbf{theory}，后者可以看成是一些 \textbf{``partial'' models}。  说 partial 的原因是因为它不代表整个 model。  事实上 model 是非常庞大的东西，不可能储存在物理系统中。  人工智能或大脑只能储存 某些 theories 和部分的 models。  人工智能的关键问题是如何找一种良好的 syntax 结构，令 theory 的学习更快、更有效率。 
+
+\section{什么是 strong AI？}
+
+\textbf{神经网络} 基本上是：
+\begin{eqnarray}
+\mbox{\footnotesize 每层的} \tikzmark{ww} \mbox{\footnotesize \textbf{权重}矩阵} \quad \quad \mbox{\footnotesize 总层数} \tikzmark{LL} \nonumber \\
+\nonumber \\
+F(\vec{x}) = \sigmoid(W_1 \tikzmark{wa} \sigmoid(W_2 \tikzmark{wb} ... \sigmoid( W_L \tikzmark{wc} \tikzmark{L} \; \vec{x} )))
+\begin{tikzpicture}[overlay,remember picture]
+  \draw[-, shorten <=12pt, transform canvas={shift={(-10pt,10pt)}}] (ww.center) to (wa.center);
+  \draw[-, shorten <=16pt, transform canvas={shift={(-10pt,10pt)}}] (ww.center) to (wb.center);
+  \draw[-, shorten <=28pt, transform canvas={shift={(-10pt,10pt)}}] (ww.center) to (wc.center);
+  \draw (LL.center) +(-15pt,-3pt) -- ([shift={(-2pt,6pt)}]L.center);
+\end{tikzpicture}
+\end{eqnarray}
+它的 \textbf{参数} 集合 $\Theta = \{ W_{i, j}^{\ell} \} = \mathbb{R}^m$，其中 $m$ = \# weights。 
+
+\textbf{机器学习} 的目的是 \uline{寻找 optimal $\Theta$ subject to an objective function}.  换句话说，机器学习 = \textbf{optimization}，应用数学的最基本问题之一。
+
+如果将 参数集 改变：
+\begin{equation}
+\Theta \in \mathbb{R}^m \quad \rightsquigarrow \quad \Theta \in \mathcal{L}^m
+\end{equation}
+其中 $\mathcal{L}$ 是某种 （例如一阶）\textbf{逻辑语法}（换句话说 $\Theta$ 是 $m$ 个一阶逻辑式子的集合），这个最优化问题的解 $\Theta^*$ 是一个 optimal logic theory，也就是 强人工智能。  
+
+换句话说，我们的「纲领」是要从 \textbf{实数} 上的最优化理论，过渡到 \textbf{逻辑式子} 上的最优化理论。 
+
+上面说的 objective function 需要用一个 逻辑引擎 evaluate，它包含 \textbf{unification} 和 \textbf{resolution} 两个算法。
+
+% \textit{重要的事情重复一遍}：
+
+\begin{tcolorbox}[hbox, breakable, colback=yellow]
+强人工智能 的樽颈问题 是\textbf{学习算法}的速度
+\end{tcolorbox}
+
+有两个可能的解决方案：
+\begin{itemize}[itemindent=4em]
+\item[(plan A)] \textbf{Genetic algorithm}.  GA 本身和逻辑结构非常兼容，在这条路线上已经没有理论上的 obstructions.  见 \S \ref{COCO}。\\
+\item[(plan B)] \textbf{Neural network / deep learning}.  这个方法仍然存在一些障碍，本文大部份篇幅都是为了解决如何用 NN 实现 经典逻辑引擎 的问题。 
+\end{itemize}
+
+\section{协同进化算法 (COCO)}
+\label{COCO}
+
+这是 plan {\color{red} A}。
+
+% Substitution 的麻烦令我想到 \uline{放弃用 neural network 直接处理逻辑，而是用 hybrid 的 神经／逻辑 混合}： 视觉神经用 deep neural network，到高层次转用符号逻辑表述，后者用 genetic algorithm 做学习。
+
+首先需要一个 logic-based \textbf{rule engine}，它负责 forward-chaining（正向逻辑推导），这完全是经典 AI 的范围。 例如 经典的 Soar architecture [Carnegie-Mellon 大学] 就是一个 rule-base 引擎。 % 还有我这一代的 OpenCog, OpenNARS, 和我写的 Genifer\footnote{Genifer 仍未到达 production stage.}，或许还有更新一代的 AGI 系统（？）  
+
+% 经典逻辑 AI 的樽颈问题是 \uline{rules 的学习算法太慢}，
+%\begin{itemize}
+%\item plan A： 继续用经典逻辑引擎，用 genetic algorithm 做学习算法
+%\item plan B： 将逻辑记忆映射到向量空间，再用神经网络学习逻辑 rules
+%\end{itemize}
+
+基因算法的 population 是由个别的逻辑 rules 组成，但 winner 并不是单一条 rule，而是一整套 rules（最高分的 $N$ 个）。 这叫 \textbf{cooperative co-evolution}（COCO）。  
+
+输入和输出是 logic formulas，其实更易处理。 
+
+整个系统仍然是基於 reinforcement learning 的，但不需要直接做 RL，因为那些 rules 其实就是 \textbf{actions}，每条 rule  的 probabilistic strength 就像 $Q$-learning 中 $Q$值的作用。 
+
+若说这方案仍存在缺点，或许是 COCO 似乎缺乏成熟的算法理论。
 
 \section{为什么 神经网络 做不到 substitutions？}
 
@@ -142,7 +210,7 @@ Logic \textbf{theory} 中的一个式子 可以导致 model 中出现很多 \tex
 \vcenter{\hbox{\includegraphics[scale=0.6]{monolithic-NN.png}}}
 \end{equation}
 
-首先只考虑\textbf{前件}的成立，一种可行的\textbf{几何图像}是这样的：
+首先只考虑\textbf{前件}的成立，一种可行的\textbf{几何图像}是这样的 \footnote{这只是众多可能的 representations 之一，但似乎任何「几何」形式的 representations 都有类似问题。 除非我们考虑有 ``procedural'' 特点的 representations？ 以下会讨论.... }：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.6]{heart-break.png}}}
 \end{equation}
@@ -175,18 +243,30 @@ $\in$ 很容易用神经网络解决，例如可以定义 $\heartsuit$ 为一个
   \draw[->,red,shorten >=7pt,shorten <=7pt] (a.center) to node [auto, above=2pt] {$id$} (b.center);
 \end{tikzpicture}
 \end{equation}
+这要求神经网络的函数曲面穿过某些 diagonal 线，如下图：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.4]{diagonal.png}}}
+\end{equation}
+但这也不是神经网络擅长的，需要很多例子训练（而不是先天性具备的 bias）。
 
+\begin{tcolorbox}[breakable, colback=yellow]
+用神经网络解决强人工智能的最大障碍是 从命题逻辑到一阶逻辑的\textbf{跃升}，特别是 compare 和 copy 这两种运算
+% The bottleneck of strong AI is the \textbf{learning algorithm}'s speed, and the most crucial obstruction is the \textbf{lifting} from propositional to first-order logic.
+\end{tcolorbox}
 
-\section{Distributive representations}
+似乎在 RNN 的情况下也一样（因为 RNN 可以 unfold 成很长的 feed-forward NN），所以我估计 RNN 不能做到 generic comparator 的功能，可以用实验验证。 
 
-Distributive representation 当然是针对神经网络而言的，因为神经网络是现时最强的机器学习方法（除了我最近开始提倡使用的 \textbf{基因算法}）。
+\section{Neural representations}
 
-Distributive 的意思是： 假设有一个 vector 表示神经网络的输出端有 $n = 10$ 粒神经元：
+% Distributive representation 是针对神经网络而言的，因为神经网络是现时最强的机器学习方法（除了我最近开始提倡使用的 \textbf{基因算法}）。
+
+\textbf{Distributive representation} 的意思是： 假设有一个 vector 表示神经网络的输出端有 $n = 10$ 粒神经元：
 \begin{equation}
 \vec{x} = (x_1, x_2, .... , x_{10})
 \end{equation}
-用 2 进制，每个 $x_i \in \{ 0, 1 \}$，则 $\vec{x}$ 可以分别表示 10 个 ``\textbf{one-hot}'' 的概念。  但如果用 distributive representation，这 10 个 bits 最多可以表达 $2^n = 1024$ 个不同的状态／概念。  所以 distributiveness 可以非常有效地善用神经元。
+用 2 进制，每个 $x_i \in \{ 0, 1 \}$，则 $\vec{x}$ 可以分别表示 10 个 ``\textbf{one-hot}'' 的概念。  但如果用 distributive representation，这 10 个 bits 最多可以表达 $2^n = 1024$ 个不同的状态／概念。  但其实 one-hot features 的 conjunctions 如果看成是不同的状态，则和 distributive representation 没有区别。  所以，神经网络的 representation 本质上可以说是 $\mathbb{R}^n$ vector 而已，或者看成是 $n$-维流形的 $n$ 个座标。
 
+\begin{comment}
 举例来说，「遇见美女过马路」。 这个图像经过譬如 CNN 的处理后，可以得到一个 \textbf{分布式知识表述}：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{NN-activation-patterns.png}}}
@@ -198,14 +278,33 @@ Distributive 的意思是： 假设有一个 vector 表示神经网络的输出�
 \boxed{\mbox{neat proposition}} \quad p \Leftrightarrow \bigwedge q_i \quad \boxed{\mbox{distributive features}}
 \end{equation}
 有时（例如纯文字输入时），知道的只是一个 neat 命题，例如「美女过马路」，并不知道其他细节（例如「金发」），这时仍然可以有分布式表述，但那些特徵会是比较抽象的。
+\end{comment}
 
 考虑「白猫追黑猫」这个图像：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{white-cat-chase-black-cat.png}}}
 \end{equation}
-「猫」的概念需要出现 \textbf{两次}，但神经网络内对应於「猫」的特徵只有 \textbf{一组}（除非有两个重复的可以表示任何概念的 modules，但很浪费）。 换句话说，现时的 CNN 没有「巡迴 (traverse)」视野域的能力； \uline{它不能辨别和描述物体之间的 }\textbf{\uline{关系}}。  我很难想像一个 ``monolithic'' neural module 怎样可以做到这功能。 似乎必须将命题表述成一连串 概念 的 \textbf{时间序列} (time sequence)，某种 \textbf{短期记忆} (short-term memory)。
+「猫」的概念需要出现 \textbf{两次}，但神经网络内对应於「猫」的特徵只有 \textbf{一组}（除非有两个重复的可以表示任何概念的 modules，但很浪费）。 换句话说，现时的 CNN 没有「巡迴 (traverse)」视野域的能力； \uline{它不能辨别和描述物体之间的 }\textbf{\uline{关系}}。  
 
-通常 model 太大，需要用 attention mechanism 选取它的一个 fragment 「呈示」给 神经网络 处理：
+很难想像一个 ``monolithic'' neural module （例如 feed-forward NN 或 RNN）怎样可以做到这功能。 似乎必须将命题表述成一连串 概念 的 \textbf{时间序列} (time sequence)，即某种 \textbf{短期记忆} (\textbf{STM}, short-term memory)。
+
+我有点惊讶地发现，目前 神经网络 没有 \textbf{短期记忆} 的机制，「短期」意思是在 time-scale 上短於 weights 改变的时间。 例如我告诉你一串数字（例如户口号码），你可以在脑中记住它，但这个机制在现时人工神经网络里面似乎没有研究，或许在 computational neuroscience 里面有些模型，但暂时我不清楚。  缺乏这种 STM，则很难模拟 symbolic logic，换句话说，做不到强人工智能。 
+
+例如用 NN 实现一个 \textbf{动态的记忆体}，它接收新来的元素时，会对记忆体中其他元素逐一 \textbf{比较}，而且具备 \textbf{复制} 功能。  例如以下这个像「迴转木马」的时间序列机制（每个 $\NewSym{distributive-vector.png}$ 代表一支 distributive vector）：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.7]{carousel-of-vectors.png}}}
+\end{equation}
+但仍未解决 compare 和 copy 的问题。 总之，纯粹用 NN 模拟 STM，明显地很麻烦。
+
+\subsection{Graph neural networks}
+
+这是 plan {\color{red} B}。 
+
+重点是： 用 graph 做记忆体（包括短期和长期记忆），而在增加新记忆单元时，相同的 nodes 会被 match 成一个，换句话说 matching 这步骤用传统 symbolic 方法解决，馀下的问题再交给 神经网络。 
+
+很多谢 DeepMind 在 2018 年 6 月发表的 graph network 论文 \parencite{Battaglia2018}，他们 survey 了 graph network 的发展情况。  但他们提出的 graph network 更接近一些 physical system 例如 弹簧和球体 的系统，而不是 first-order 的模型。
+
+通常 model 太大，需要用 attention mechanism 选取它的一个 fragment，再 ``present'' 给 神经网络 处理：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{attentional-mechanism.png}}}
 \end{equation}
@@ -219,9 +318,10 @@ Distributive 的意思是： 假设有一个 vector 表示神经网络的输出�
 \end{tikzcd}
 \quad \boxed{vector}
 \end{equation}
-但 graph 并不是一个「线性」的结构（线性是指符号形式上，例如 tree 可以表示成线性的一行），将 graph 结构表示成一支 vector 似乎颇难（这或许是 graph neural networks 迟迟未有突破的原因）。  
+但 graph 并不是一个「线性」的结构 \footnote{线性是指符号形式上，例如 tree 可以表示成线性的一行}，将 graph 结构表示成一支 vector 似乎颇难（这或许是 graph neural networks 迟迟未有突破的原因）。  
 
-一个自然的想法是直接利用 quiver representation，它将 vertex 变成 vector space，edge 变成 linear transformation between vector spaces. 例如：
+\begin{tcolorbox}[breakable, parbox=false]
+数学表示论里面有 \textbf{quiver representations}，它将 vertex 变成 vector space，edge 变成 linear transformation between vector spaces. 例如：
 \begin{equation}
 \begin{tikzcd}[column sep = large]
 \mbox{John} \arrow[r, bend left, "\heartsuit"] & \arrow[l, bend left, swap, "\neg \heartsuit"] \mbox{Mary}
@@ -233,35 +333,16 @@ V_1 \arrow[r, bend left, "M_1"] & \arrow[l, bend left, "M_2"] V_2
 \end{equation}
 其中 $V_1, V_2$ 是向量空间，$M_1, M_2 \in GL(\mathbb{R})$ 是 矩阵。  但这仍然不是一支向量。  
 
-事实上，要做到以上功能，似乎必需有一个 \textbf{动态的记忆体}，它接收新来的元素时，会对记忆体中其他元素逐一 \textbf{比较}，而且具备 \textbf{复制} 功能。  例如我考虑过一个像「迴转木马」的时间序列机制（每个 $\NewSym{distributive-vector.png}$ 代表一支 distributive vector）：
-\begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.7]{carousel-of-vectors.png}}}
-\end{equation}
-但仍未解决 compare 和 copy 的问题。 总之，明显地很麻烦。
+在 向量空间 $V_i$ 的 \textbf{基底变换}下，两个矩阵 $M$ 可能是同一个线性变换。  故需要考虑它们的\textbf{不变性}，亦即 moduli。 表示论 关心的是 将各种 $M$ \uline{分解成不可约成分}。 这分解里出现的 Dynkin diagrams 和 Lie algebra 分类时出现的一样。  但如果 quiver 不是 Dynkin 或某些扩充，则这 quiver 是 ``wild'' 的，很难分解。 即使很简单的 quiver 也可以是 wild type。
 
-\section{Genetic algorithm}
+每个 quiver 定义一个 path algebra，它的元素是 quiver 里的 path，换句话说即是逻辑上的 \textbf{关系} 及其 compositions。 暂时不知道 quiver representations 在 AI 里有什么用。
+\end{tcolorbox}
 
-这是 plan {\color{red} A}。
+解决办法： 现时 在 自然语言理解 方面 最强的深度学习模型，据我所知是基於 CNN 或 RNN 的模型，而它们处理的是线性的 sequence 输入。 所以要将 memory graph 分拆成线性的元素（亦即个别的 关系／命题），而且里面不可以用 global variable references（换句话说，已经进行了 variable matching 处理）。  然后 NN 输出的 variable copying 也是 externally 处理的。 换句话说，用 ``hybrid'' 的方式，结合 NN 和 \textbf{graph rewriting}。
 
-Substitution 的麻烦令我想到 \uline{放弃用 neural network 直接处理逻辑，而是用 hybrid 的 神经／逻辑 混合}： 视觉神经用 deep neural network，到高层次转用符号逻辑表述，后者用 genetic algorithm 做学习。
+补充一点： attention mechanism 要 traverse memory graph，换句话说是一种 graph search algorithm，这部分可以和 NN 结合成同一个 module（现时有很多 RNN architectures 就是这样）。
 
-首先需要一个 logic-based \textbf{rule engine}，它负责 forward-chaining（正向逻辑推导），这完全是经典 AI 的范围。 例如 经典的 Soar architecture [Carnegie-Mellon 大学] 就是一个 rule-base 引擎。 还有我这一代的 OpenCog, OpenNARS, 和我写的 Genifer\footnote{Genifer 仍未到达 production stage.}，或许还有更新一代的 AGI 系统（？）  
-
-经典逻辑 AI 的樽颈问题是 \uline{rules 的学习算法太慢}，
-\begin{itemize}
-\item plan A： 继续用经典逻辑引擎，用 genetic algorithm 做学习算法
-\item plan B： 将逻辑记忆映射到向量空间，再用神经网络学习逻辑 rules
-\end{itemize}
-
-基因算法的 population 是由个别的 rules 组成，但 winner 并不是单一条 rule，而是一整套 rules（最高分的 $N$ 个）。 这叫 \textbf{cooperative co-evolution}（COCO）。  
-
-输入和输出是 logic formulas，其实更易处理。 
-
-整个系统仍然是基於 reinforcement learning 的，但不需要直接做 RL，因为那些 rules 其实就是 \textbf{actions}，每条 rule  的 probabilistic strength 就像 $Q$-learning 中 $Q$值的作用。 
-
-\section{Graph neural networks}
-
-这是 plan {\color{red} B}。  很多谢 DeepMind 最近发表的论文： 
+馀下 2 节是一些 数学 背景知识....
 
 \section{Categorical semantics}
 \label{Categorical-semantics}
