@@ -8,6 +8,7 @@
 \usepackage{tikz}
 \usepackage{amsthm}
 \usepackage{enumitem}	% for \itemize custom labels
+\usepackage{turnstile}	% longer turnstiles
 \usepackage[backend=biber,bibstyle=authoryear,citestyle=authoryearbrack]{biblatex}
 \bibliography{../AGI-book}
 
@@ -23,13 +24,14 @@
 
 \setcounter{secnumdepth}{1}		% use numbers in sections only
 
-\newcommand{\code}   [1]{{\footnotesize{\ttfamily #1}}}
+\newcommand{\code}[1]{{\footnotesize{\ttfamily #1}}}
 \newcommand{\tab}{\hspace*{2cm}}
 \newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
 \newcommand{\Chi}{\raisebox{2.5pt}{$\chi$}}
 \newcommand*\KB{\vcenter{\hbox{\includegraphics{../KB-symbol.png}}}}
 \newcommand*\NewSym[2][0.5]{\vcenter{\hbox{\includegraphics[scale=#1]{#2}}}}
 \newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
+\newcommand{\smbox}[1]{\boxed{\footnotesize{\mbox{#1}}}}
 
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
@@ -102,7 +104,9 @@ $\mbox{John} \in \mbox{Male}, \quad \mbox{John, Mary} \in \mbox{Mathematician}$�
 Hypergraph 可以一一对应於拓扑学上的 \textbf{simplicial complex}，可以研究它的 homology 和 cohomology。 Simplicial complex 也可以和 \textbf{square-free monomial ideals} 一一对应。 Square-free 的意思是 $x_i$ 的指数只可以是 0 或 1。  后者是 \textbf{组合交换代数} (combinatorial commutative algebra) 的研究范围。  暂时我不知道这些关联有没有用，详细可参看 \parencite{Brown2013}, \parencite{Miller2005}。
 \end{tcolorbox}
 
-逻辑的 syntactic \textbf{theory} 方面，例如可以有以下这个式子（``失恋则不开心''）：
+一个逻辑式子的集合叫 logical \textbf{theory}.  一个代数等式的集合叫 \textbf{algebraic theory}.
+
+例如可以有以下这个逻辑式子（``失恋则不开心''）：
 \begin{equation}
 \forall x,y. \; \mbox{Loves}(x,y) \wedge \neg \mbox{Loves}(y,x) \rightarrow \mbox{Unhappy}(x)
 \end{equation}
@@ -128,9 +132,9 @@ Logic \textbf{theory} 中的一个式子 可以导致 model 中出现很多 \tex
 
 附带一提，经典逻辑人工智能 (classical logic-based AI) 的知识表述 是分拆成 \textbf{rules} 和 \textbf{facts} 两部分。 前者是带有 $\forall$ \textbf{变量} 的式子，后者是 ground sentences。  Rules 储存在 $\KB$ 内，facts 储存在 \textbf{working memory} 内。 前者是一个 \textbf{theory}，后者可以看成是一些 \textbf{``partial'' models}。  说 partial 的原因是因为它不代表整个 model。  事实上 model 是非常庞大的东西，不可能储存在物理系统中。  人工智能或大脑只能储存 某些 theories 和部分的 models。  人工智能的关键问题是如何找一种良好的 syntax 结构，令 theory 的学习更快、更有效率。 
 
-\section{什么是 strong AI？}
+\section{强人工智能}
 
-\textbf{神经网络} 基本上是：
+\textbf{神经网络} ：
 \begin{eqnarray}
 \mbox{\footnotesize 每层的} \tikzmark{ww} \mbox{\footnotesize \textbf{权重}矩阵} \quad \quad \mbox{\footnotesize 总层数} \tikzmark{LL} \nonumber \\
 \nonumber \\
@@ -142,36 +146,72 @@ F(\vec{x}) = \sigmoid(W_1 \tikzmark{wa} \sigmoid(W_2 \tikzmark{wb} ... \sigmoid(
   \draw (LL.center) +(-15pt,-3pt) -- ([shift={(-2pt,6pt)}]L.center);
 \end{tikzpicture}
 \end{eqnarray}
-它的 \textbf{参数} 集合 $\Theta = \{ W_{i, j}^{\ell} \} = \mathbb{R}^m$，其中 $m$ = \# weights。 
+它的 \textbf{参数} 集合 $\Theta = \{ W_{i, j}^{\ell} \} \in \mathbb{R}^m$，其中 $m$ = \# weights。 
 
 \textbf{机器学习} 的目的是 \uline{寻找 optimal $\Theta$ subject to an objective function}.  换句话说，机器学习 = \textbf{optimization}，应用数学的最基本问题之一。
-
-如果将 参数集 改变：
-\begin{equation}
-\Theta \in \mathbb{R}^m \quad \rightsquigarrow \quad \Theta \in \mathcal{L}^m
-\end{equation}
-其中 $\mathcal{L}$ 是某种 （例如一阶）\textbf{逻辑语法}（换句话说 $\Theta$ 是 $m$ 个一阶逻辑式子的集合），这个最优化问题的解 $\Theta^*$ 是一个 optimal logic theory，也就是 强人工智能。  
-
-换句话说，我们的「纲领」是要从 \textbf{实数} 上的最优化理论，过渡到 \textbf{逻辑式子} 上的最优化理论。 
-
-上面说的 objective function 需要用一个 逻辑引擎 evaluate，它包含 \textbf{unification} 和 \textbf{resolution} 两个算法。
-
-% \textit{重要的事情重复一遍}：
 
 \begin{tcolorbox}[hbox, breakable, colback=yellow]
 强人工智能 的樽颈问题 是\textbf{学习算法}的速度
 \end{tcolorbox}
 
-有两个可能的解决方案：
+训练时，给定一组 data points（$F$ 是神经网络）：
+\begin{equation}
+\label{NN-training}
+\boxed{\mbox{training examples}} \quad
+e \stackrel{F}{\longrightarrow} a
+\quad \boxed{\mbox{answers}} 
+\end{equation}
+每个答案的误差是 $\epsilon$，目标函数 $J$ 是很多次 iterations 的误差之和。
+% \begin{equation}
+% J = \sum_t \epsilon \; ( e, a, \Theta )
+% \end{equation}
+我们想令 $J$ 最优化，方法是计算 $J$ 对于 $\Theta$ 的梯度 (gradient)：
+\begin{equation}
+\nabla_{\Theta} J := \frac{\partial J}{\partial \Theta}
+\end{equation}
+当然这就是著名的 back-propagation 算法。
+
+人工智能的学习算法要求从 \uline{optimization over $\mathbb{R}$ }\textbf{\uline{过渡}}\uline{到 optimization over $\mathcal{L}$}（\textbf{逻辑式子}上的最优化）：
+\begin{equation}
+\Theta \in \mathbb{R}^m \quad \rightsquigarrow \quad \Theta \in \mathcal{L}
+\end{equation}
+其中 $\mathcal{L}$ 是某种 （例如一阶谓词）\textbf{逻辑语法}，$\Theta$ 是一个逻辑式子的集合。 这最优化问题的解 $\Theta^*$ 是一个 optimal logic theory。
+
+这时，objective function 需要用一个 \textbf{逻辑引擎} evaluate，它包含 \textbf{unification} 和 \textbf{resolution} 两个算法。
+
+训练的过程类似 (\ref{NN-training})：
+\begin{equation}
+\boxed{\mbox{training examples}} \quad
+e \sststile{}{\Theta} a
+\quad \boxed{\mbox{answers}} 
+\end{equation}
+但现在 $\vdash$ 是根据 $\Theta$ 的 \textbf{逻辑推导}，$e$ 和 $a$ 是逻辑式子的集合。 给定一些前提，可以推出很多结论，其中有些得到奖励或惩罚。 在 \textbf{强化学习} (reinforcement learning，亦即 dynamtic programming) 的框架下，训练是根据 \textbf{奖励} 而不是 \textbf{误差}，和上面略有不同。 
+
+有几个可能的解决方案：
 \begin{itemize}[itemindent=4em]
-\item[(plan A)] \textbf{Genetic algorithm}.  GA 本身和逻辑结构非常兼容，在这条路线上已经没有理论上的 obstructions.  见 \S \ref{COCO}。\\
-\item[(plan B)] \textbf{Neural network / deep learning}.  这个方法仍然存在一些障碍，本文大部份篇幅都是为了解决如何用 NN 实现 经典逻辑引擎 的问题。 
+
+\item[(plan A)] \textbf{Genetic algorithm}.  \uline{放弃梯度下降}，GA 本来就非常适合\textbf{离散}的搜寻空间，它和逻辑结构很兼容，在这条路线上已经没有理论上的 obstructions.  见 \S \ref{COCO}。\\
+
+\item[(plan B)] \textbf{Neural network / deep learning}.  从 \S\ref{NN} 开始大部份篇幅都是为了解决如何用 NN 实现 经典逻辑引擎 的问题，特别是 variable substitution 的问题，最后发觉问题的癥结在於缺少了 short-term memory 的机制。 解决办法是 用 graph 做\textbf{记忆系统}，用神经网络做 graph re-writing，亦即 DeepMind 提出的 graph neural network，这是一种 ``hybrid'' architecture.  详见 \S \ref{graph-NN}。\\
+
+\item[(plan C)] \uline{放弃一阶逻辑}。 考虑到以下两者的相似性：
+\begin{equation}
+\begin{tikzcd}[column sep = large]
+\mbox{逻辑语法} \arrow[d] \\
+\mbox{partial model} 
+\end{tikzcd}
+\approx
+\begin{tikzcd}[column sep = large]
+\mbox{神经网络 graph re-writer} \arrow[d] \\
+\mbox{graph model}
+\end{tikzcd}
+\end{equation}
+或许会想到： \uline{其实一阶逻辑语法是不需要的，只需要某种将 model }\textbf{\uline{改写}}\uline{的能力}。 当然，如果改写的能力太弱，则会 ``throw the baby out with the water''，亦即丧失了一阶逻辑的\textbf{泛化}能力。  同时，要从 optimization 的角度考虑，什么形式的改写才最有利於速度。  模型的 representation 也是一个考虑因素： 它应该有某种良好的 \textbf{metric}，这 metric 近似 semantic distance，而不是纯粹基於 logic syntax。 事实上，完美的 semantic metric 是\textbf{不可计算的}，因它是 Kolmogorov complexity.  本篇文章主要分析 plan A 和 B，plan C 是笔者未来会专注的方向。
+
 \end{itemize}
 
-\section{协同进化算法 (COCO)}
+\section{Plan A: 协同进化算法 (COCO)}
 \label{COCO}
-
-这是 plan {\color{red} A}。
 
 % Substitution 的麻烦令我想到 \uline{放弃用 neural network 直接处理逻辑，而是用 hybrid 的 神经／逻辑 混合}： 视觉神经用 deep neural network，到高层次转用符号逻辑表述，后者用 genetic algorithm 做学习。
 
@@ -189,9 +229,10 @@ F(\vec{x}) = \sigmoid(W_1 \tikzmark{wa} \sigmoid(W_2 \tikzmark{wb} ... \sigmoid(
 
 整个系统仍然是基於 reinforcement learning 的，但不需要直接做 RL，因为那些 rules 其实就是 \textbf{actions}，每条 rule  的 probabilistic strength 就像 $Q$-learning 中 $Q$值的作用。 
 
-若说这方案仍存在缺点，或许是 COCO 似乎缺乏成熟的算法理论。
+[ 我还未有时间 survey COCO 的实践理论。 ]
 
-\section{为什么 神经网络 做不到 substitutions？}
+\section{神经网络 处理 substitutions 的困难}
+\label{NN}
 
 考虑上节讲过的 逻辑 rule（``失恋则不开心''）：
 \begin{equation}
@@ -210,7 +251,25 @@ F(\vec{x}) = \sigmoid(W_1 \tikzmark{wa} \sigmoid(W_2 \tikzmark{wb} ... \sigmoid(
 \vcenter{\hbox{\includegraphics[scale=0.6]{monolithic-NN.png}}}
 \end{equation}
 
-首先只考虑\textbf{前件}的成立，一种可行的\textbf{几何图像}是这样的 \footnote{这只是众多可能的 representations 之一，但似乎任何「几何」形式的 representations 都有类似问题。 除非我们考虑有 ``procedural'' 特点的 representations？ 以下会讨论.... }：
+首先考虑\textbf{后件}的 copy 问题。 为简单起见，假设逻辑 variable $z$ 对应於 输入向量 $\vec{x}$ 中的某些分量，例如 $x_i$.  Copy 的作用是将 $x_i$ 抄到 $y_j$ 的位置：
+\vspace*{10pt}
+\begin{equation}
+\vec{F}: \; (x_1, ..., {\color{red} x_i} \tikzmark{a}, ... , x_n) \mapsto (y_1, ... , \tikzmark{b} {\color{red} y_j} , ... , y_n)
+\begin{tikzpicture}[overlay,remember picture,out=45,in=135,distance=1.1cm]
+  \draw[->,red,shorten >=7pt,shorten <=7pt] (a.center) to node [auto, above=2pt] {$id$} (b.center);
+\end{tikzpicture}
+\end{equation}
+这要求神经网络的函数曲面穿过某些 diagonal 线，如下图：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.4]{diagonal.png}}}
+\end{equation}
+以下是一个简单的 copier 神经网络（所有权重 = 1，其他权重 = 0 没有显示）：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.7]{NN-copying.png}}}
+\end{equation}
+一个输入 dim = $n$，输出 dim = $2 n$ 的神经网络，fully connected 的话需要训练 $2 n^2$ 个 weights。 但我还未有时间试验一般多层神经网络学习这个动作需要训练多久。 
+
+其次，考虑\textbf{前件}的成立，一种可行的\textbf{几何图像}是这样的 \footnote{这只是众多可能的 representations 之一，但似乎任何「几何」形式的 representations 都有类似问题。 除非我们考虑有 ``procedural'' 特点的 representations？ 以下会讨论.... }：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.6]{heart-break.png}}}
 \end{equation}
@@ -233,30 +292,15 @@ $\in$ 很容易用神经网络解决，例如可以定义 $\heartsuit$ 为一个
   \draw[-, red, shorten <=20pt, transform canvas={shift={(2pt,13pt)}}] (b1.center) to (b2.center);
 \end{tikzpicture}
 \end{eqnarray}
-这两个 等号 需要的 comparison 是 神经网络 不擅长的。
-
-其次，考虑\textbf{后件}的 copy 问题。 为简单起见，假设逻辑 variable $z$ 对应於 输入向量 $\vec{x}$ 中的某些分量，例如 $x_i$.  Copy 的作用是将 $x_i$ 抄到 $y_j$ 的位置：
-\vspace*{10pt}
+以下是一个简单的用 RNN 神经网络 模拟的 comparator（所有 = 0 的权重 没有显示）：
 \begin{equation}
-\vec{F}: \; (x_1, ..., {\color{red} x_i} \tikzmark{a}, ... , x_n) \mapsto (y_1, ... , \tikzmark{b} {\color{red} y_j} , ... , y_n)
-\begin{tikzpicture}[overlay,remember picture,out=45,in=135,distance=1.1cm]
-  \draw[->,red,shorten >=7pt,shorten <=7pt] (a.center) to node [auto, above=2pt] {$id$} (b.center);
-\end{tikzpicture}
+\vcenter{\hbox{\includegraphics[scale=0.7]{NN-comparator.png}}}
 \end{equation}
-这要求神经网络的函数曲面穿过某些 diagonal 线，如下图：
-\begin{equation}
-\vcenter{\hbox{\includegraphics[scale=0.4]{diagonal.png}}}
-\end{equation}
-但这也不是神经网络擅长的，需要很多例子训练（而不是先天性具备的 bias）。
+在 iterate $n$ 次之后，最左边的输出 会是 $\vec{x} \stackrel{?}{=} \vec{y}$ 的真假值。 假设 输入维数是 $2 n$，需要训练 $(2 n)^2$ 个 weights。
 
-\begin{tcolorbox}[breakable, colback=yellow]
-用神经网络解决强人工智能的最大障碍是 从命题逻辑到一阶逻辑的\textbf{跃升}，特别是 compare 和 copy 这两种运算
-% The bottleneck of strong AI is the \textbf{learning algorithm}'s speed, and the most crucial obstruction is the \textbf{lifting} from propositional to first-order logic.
-\end{tcolorbox}
+结论： 根据以上分析，用 NN 模拟 copier 和 comparator 似乎不算很难，但实际上还要将这些「元件」配合 short-term memory 使用，整个 architecture 仍然是未知的。
 
-似乎在 RNN 的情况下也一样（因为 RNN 可以 unfold 成很长的 feed-forward NN），所以我估计 RNN 不能做到 generic comparator 的功能，可以用实验验证。 
-
-\section{Neural representations}
+\section{神经网络的 知识表述}
 
 % Distributive representation 是针对神经网络而言的，因为神经网络是现时最强的机器学习方法（除了我最近开始提倡使用的 \textbf{基因算法}）。
 
@@ -288,17 +332,21 @@ $\in$ 很容易用神经网络解决，例如可以定义 $\heartsuit$ 为一个
 
 很难想像一个 ``monolithic'' neural module （例如 feed-forward NN 或 RNN）怎样可以做到这功能。 似乎必须将命题表述成一连串 概念 的 \textbf{时间序列} (time sequence)，即某种 \textbf{短期记忆} (\textbf{STM}, short-term memory)。
 
-我有点惊讶地发现，目前 神经网络 没有 \textbf{短期记忆} 的机制，「短期」意思是在 time-scale 上短於 weights 改变的时间。 例如我告诉你一串数字（例如户口号码），你可以在脑中记住它，但这个机制在现时人工神经网络里面似乎没有研究，或许在 computational neuroscience 里面有些模型，但暂时我不清楚。  缺乏这种 STM，则很难模拟 symbolic logic，换句话说，做不到强人工智能。 
+我有点惊讶地发现，目前 神经网络 没有 \textbf{短期记忆} 的机制，「短期」意思是在 time-scale 上短於 weights 改变的时间。 例如我告诉你一串数字（例如电话号码），你可以在脑中记住它，但这个机制在现时人工神经网络里面似乎没有研究，或许在 computational neuroscience 里面有些模型，但暂时我不清楚。  缺乏这种 STM，则很难模拟 symbolic logic，换句话说，做不到强人工智能。 
 
 例如用 NN 实现一个 \textbf{动态的记忆体}，它接收新来的元素时，会对记忆体中其他元素逐一 \textbf{比较}，而且具备 \textbf{复制} 功能。  例如以下这个像「迴转木马」的时间序列机制（每个 $\NewSym{distributive-vector.png}$ 代表一支 distributive vector）：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{carousel-of-vectors.png}}}
 \end{equation}
-但仍未解决 compare 和 copy 的问题。 总之，纯粹用 NN 模拟 STM，明显地很麻烦。
+总之，纯粹用 NN 模拟 STM，明显地很麻烦。
 
-\subsection{Graph neural networks}
+\begin{tcolorbox}[breakable, colback=yellow]
+用神经网络解决强人工智能的最大障碍是 从命题逻辑到一阶逻辑的\textbf{跃升}，特别是 substitution 运算，需要有 short-term memory 机制
+% The bottleneck of strong AI is the \textbf{learning algorithm}'s speed, and the most crucial obstruction is the \textbf{lifting} from propositional to first-order logic.
+\end{tcolorbox}
 
-这是 plan {\color{red} B}。 
+\section{Plan B: Graph neural networks}
+\label{graph-NN}
 
 重点是： 用 graph 做记忆体（包括短期和长期记忆），而在增加新记忆单元时，相同的 nodes 会被 match 成一个，换句话说 matching 这步骤用传统 symbolic 方法解决，馀下的问题再交给 神经网络。 
 
@@ -343,6 +391,7 @@ V_1 \arrow[r, bend left, "M_1"] & \arrow[l, bend left, "M_2"] V_2
 补充一点： attention mechanism 要 traverse memory graph，换句话说是一种 graph search algorithm，这部分可以和 NN 结合成同一个 module（现时有很多 RNN architectures 就是这样）。
 
 馀下 2 节是一些 数学 背景知识....
+\hrule
 
 \section{Categorical semantics}
 \label{Categorical-semantics}
@@ -410,11 +459,19 @@ Boolean coherent categories		& first-order classical logic \\
 \end{tabular}
 \end{equation}
 
-``Geometric'' logic 的意思来自 \textbf{geometric morphisms}，它可以粗略地理解为两个 topoi 之间的映射，类似於 \textbf{continuous maps} between topological spaces。 在 1963 年左右，topos 的概念独立地来自几个不同的发源地： Alexander Grothendieck 在代数几何方面发展的 sheaf theory，和 F William Lawvere 用范畴论重新表述集合论，还有 Paul Cohen 的 forcing 理论（后者用来解决 \textbf{连续统假设}）。  Sheaf 的意思是： 在一些 open sets $V_i$ 上定义的物体，它们在 overlap $V_i \cap V_j$ 上是吻合的，即可以 ``collate''。  二战后，Leray，接著 Cartan，用 open sets 的方法定义了 sheaf。 其后 Lazard 用 \'{e}tale 定义 sheaf（基本上是一个 \textbf{functor}），后者是 topos 理论的主要动机。  Grothendieck 将 sheaf 应用在 topology (cohomology)上，而后 Jean-Pierre Serre 发现它也可以用在代数几何上，他们和其他合作者 写了 1623 页的巨著 《SGA IV》，重大影响了代数几何的发展，导致 1974 年 Deligne 解决了 Weyl 猜想。  但我暂时不熟悉代数几何，所以不太清楚 Grothendieck 他们做了什么.... 详细可参看 \parencite{MacLane1992} 一书。
+``Geometric'' logic 的意思来自 \textbf{geometric morphisms}，它可以粗略地理解为两个 topoi 之间的映射，类似於 \textbf{continuous maps} between topological spaces。 
 
-在拓樸空间上，一个 open set $U$ 的 complement 是 closed 而且未必 open，所以如果局限在 open sets 之内，则 $U$ 的 ``negation'' 应该定义为 ``the interior of its complement''.  这导致 $U$ 的「双重否定」不一定等於 $U$，换句话说，\uline{the algebra of open sets follows \textbf{intuitionistic logic}}, such an algebra is called a \textbf{Heyting algebra}.  （参考书同上）
+\uline{Topos 可以理解为 set theory 受范畴论影响下的一种推广}。 每个 elementary topos\footnote{Elementary 是集合中「元素」的意思} 有一个 \textbf{sub-object classifier} $\Omega$.  $\Omega$ 是一个特殊的 object，例如 $\{ \top, \bot \}$，代表 \textbf{真 假} 二值。 用 $\Omega$ 可以定义 sub-objects 亦即集合论中的 \textbf{子集} 概念。  举例来说，``Love'' 是一个在 $D \times D$ 内的 \textbf{关系}，$D$ 是所有「人」的集合。  可以将 $D \times D$ 看成是 full relation，则 $\mbox{Love} \subset D \times D$ 是它的\textbf{子集}。  换句话说，这是 elementary topos 可以用来做 relation algebra 或 first-order logic 的 \textbf{模型} 的原因。 （参见 \parencite{Goldblatt2006}）
 
-Topoi 之间有两种 morphisms： \textbf{geometric morphisms} 和 \textbf{logical functors}.  前者保持「几何结构」，后者保持逻辑中的 元素 (elementary) 和 type theory，所以有 \textbf{elementary topos} 的定义。 后者的特点是它有 \textbf{sub-object classifier} $\Omega$。 $\Omega$ 是一个特殊的 object，例如 $\{ \top, \bot \}$，代表 \textbf{真 假} 二值。 用 $\Omega$ 可以定义 sub-objects 亦即集合论中的 \textbf{子集} 概念。  举例来说，``Love'' 是一个在 $D \times D$ 内的 \textbf{关系}，$D$ 是所有「人」的集合。  可以将 $D \times D$ 看成是 full relation，则 $\mbox{Love} \subset D \times D$ 是它的\textbf{子集}。  换句话说，这是 elementary topos 可以用来做 relation algebra 或 first-order logic 的 \textbf{模型} 的原因。 （参见 \parencite{Goldblatt2006}）
+一些历史： 在 1963 年左右，topos 的概念独立地来自几个不同的发源地： Alexander Grothendieck 在代数几何方面发展的 sheaf theory，和 F William Lawvere 用范畴论重新表述集合论，还有 Paul Cohen 的 forcing 理论（后者用来解决 \textbf{连续统假设}）。  Sheaf 的意思是： 在一些 open sets $V_i$ 上定义的物体，它们在 overlap $V_i \cap V_j$ 上是吻合的，即可以 ``collate''，情形就像微分几何里一些 charts 拼合成 atlas。  二战后，Leray，接著 Cartan，用 open sets 的方法定义了 sheaf。 其后 Lazard 用 \'{e}tale 定义 sheaf，后者是 topos 理论的主要动机。  例如，一个范畴 $\mathcal{A}$ 上的 pre-sheaf 可以定义为一个 \textbf{functor}:
+\begin{equation}
+\mathcal{A}^{\mathrm{op}} \rightarrow \mathbf{Set}
+\end{equation}
+Grothendieck 将 sheaf 应用在 topology (cohomology)上，而后 Jean-Pierre Serre 发现它也可以用在代数几何上，他们和其他合作者 写了 1623 页的巨著 《SGA IV》，重大影响了代数几何的发展，导致 1974 年 Deligne 解决了 Weyl 猜想。  但我暂时不熟悉代数几何，所以不太清楚 Grothendieck 他们做了什么.... 详细可参看 \parencite{MacLane1992} 一书。
+
+在拓樸空间上，一个 open set $U$ 的 complement 是 closed 而且未必 open，所以如果局限在 open sets 之内，则 $U$ 的 ``negation'' 应该定义为 ``the interior of its complement''.  这导致 $U$ 的「\textbf{双重否定}」不一定等於 $U$，换句话说，\uline{the algebra of open sets follows \textbf{intuitionistic logic}}, such an algebra is called a \textbf{Heyting algebra}.  （参考书同上）
+
+Topoi 之间有两种 morphisms： \textbf{geometric morphisms} 和 \textbf{logical functors}.  前者保持「几何结构」，后者保持逻辑上的 type theory，所以有 \textbf{elementary topos} 的定义。 后者的特点是它有 \textbf{sub-object classifier} $\Omega$。 
 
 以下是根据 \parencite{Caramello2018} Ch.1 整理出来的一张关系图，但我暂时还不太熟悉范畴论的概念，所以也不完全理解： 
 \begin{equation}
@@ -427,7 +484,9 @@ $\lambda$-calculus 和 combinatory logic 都是可以表达任意 \textbf{函数
 
 以下内容主要来自 \parencite{Vickers1989}，是一本很易懂的书，还有更新和更详尽的 \parencite{Goubault-Larrecq2013}.
 
-Scott 的解决办法是..... 【未完待续】 $\NewSym{../UnderConst.png}$
+Scott 的解决办法是在 domain $D$ 上引入 \textbf{Scott topology}，然后只考虑 $D \rightarrow D$ 的\textbf{连续函数}。 后者的数量较少，所以避开了 Cantor 勃论。 
+
+..... 【未完待续】 $\NewSym{../UnderConst.png}$
 
 \printbibliography
 
