@@ -29,7 +29,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1"
      inkscape:cx="369.79042"
-     inkscape:cy="51.63056"
+     inkscape:cy="891.63056"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -213,7 +213,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1631,5 +1631,143 @@
          x="73.024986"
          y="325.8396"
          style="stroke-width:0.26458332">memory</tspan></text>
+    <path
+       inkscape:export-ydpi="576"
+       inkscape:export-xdpi="576"
+       sodipodi:nodetypes="sssss"
+       inkscape:connector-curvature="0"
+       id="path3336-6-9-5-3-5-3"
+       d="m 31.08968,-28.974271 c -4.13031,7.701497 3.78482,15.939947 10.96735,19.1490393 5.03528,2.249715 12.85018,9.526707 20.28906,-1.9971833 4.92327,-7.626859 1.52397,-15.103986 -5.46613,-20.376447 -10.25098,-7.732068 -21.69343,-4.414516 -25.79028,3.224591 z"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#d5f6ff;fill-opacity:1;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.84666669;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98431373;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png" />
+    <path
+       inkscape:export-ydpi="576"
+       inkscape:export-xdpi="576"
+       sodipodi:nodetypes="ssszs"
+       inkscape:connector-curvature="0"
+       id="path3336-6-9-5-0-6"
+       d="m 49.5585,-23.897847 c 0,11.06656 -8.06188,12.914444 -14.32278,14.0581963 -7.03216,1.284646 -17.903476,1.276976 -17.903476,-9.7895843 -10e-6,-11.066549 3.025936,-12.378655 12.170836,-14.993055 9.14491,-2.61439 20.05543,-0.342107 20.05542,10.724443 z"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#eeffaa;fill-opacity:0.54901961;fill-rule:evenodd;stroke:#008000;stroke-width:0.84666669;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98431373;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png" />
+    <text
+       inkscape:export-ydpi="576"
+       inkscape:export-xdpi="576"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.38666677px;line-height:0%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.28222224px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="38.84951"
+       y="-18.800531"
+       id="text5041-50-3-56-2-6"><tspan
+         style="font-size:5.64444447px;line-height:1.25;stroke-width:0.28222224px"
+         sodipodi:role="line"
+         id="tspan5043-36-2-1-2-2"
+         x="38.84951"
+         y="-18.800531">●</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="15.345832"
+       y="-33.199997"
+       id="text4108"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png"
+       inkscape:export-xdpi="576"
+       inkscape:export-ydpi="576"><tspan
+         sodipodi:role="line"
+         id="tspan4106"
+         x="15.345832"
+         y="-33.199997"
+         style="font-style:italic;fill:#008000;stroke-width:0.26458332">P</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="65.087486"
+       y="-31.347918"
+       id="text4112"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png"
+       inkscape:export-xdpi="576"
+       inkscape:export-ydpi="576"><tspan
+         sodipodi:role="line"
+         id="tspan4110"
+         x="65.087486"
+         y="-31.347918"
+         style="font-style:italic;fill:#0000ff;stroke-width:0.26458332">Q</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="39.42292"
+       y="-24.997915"
+       id="text4116"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png"
+       inkscape:export-xdpi="576"
+       inkscape:export-ydpi="576"><tspan
+         sodipodi:role="line"
+         id="tspan4114"
+         x="39.42292"
+         y="-24.997915"
+         style="font-style:italic;stroke-width:0.26458332">x</tspan></text>
+    <path
+       inkscape:export-ydpi="576"
+       inkscape:export-xdpi="576"
+       sodipodi:nodetypes="sssss"
+       inkscape:connector-curvature="0"
+       id="path3336-6-9-5-3-5-3-3-2"
+       d="m 130.35559,-27.110068 c -4.13031,7.701498 3.78482,15.939948 10.96735,19.1490407 5.03528,2.249715 12.85018,9.5267067 20.28906,-1.997184 4.92327,-7.6268587 1.52397,-15.1039857 -5.46613,-20.3764467 -10.25098,-7.732069 -21.69343,-4.414516 -25.79028,3.22459 z"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#d5f6ff;fill-opacity:0.50980392;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.42333332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.27, 1.27;stroke-dashoffset:0;stroke-opacity:0.98431373;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png" />
+    <path
+       inkscape:export-ydpi="576"
+       inkscape:export-xdpi="576"
+       sodipodi:nodetypes="sssss"
+       inkscape:connector-curvature="0"
+       id="path3336-6-9-5-3-5-3-3"
+       d="m 128.37161,-25.329655 c -4.13031,7.701498 3.78482,15.9399477 10.96735,19.1490407 5.03528,2.2497156 12.85018,9.5267076 20.28906,-1.997184 4.92327,-7.6268587 1.52397,-15.1039857 -5.46613,-20.3764477 -10.25098,-7.732068 -21.69343,-4.414516 -25.79028,3.224591 z"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#d5f6ff;fill-opacity:0.50980392;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.84666669;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98431373;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="102.04441"
+       y="-33.259548"
+       id="text4112-1"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png"
+       inkscape:export-xdpi="576"
+       inkscape:export-ydpi="576"><tspan
+         sodipodi:role="line"
+         id="tspan4110-8"
+         x="102.04441"
+         y="-33.259548"
+         style="font-style:normal;fill:#0000ff;stroke-width:0.26458332">predicate<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan5050">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="161.17038"
+       y="-33.526592"
+       id="text4112-1-0"
+       inkscape:export-filename="/home/yky/latex/intro-2-strong-AI/Venn-diagram.png"
+       inkscape:export-xdpi="576"
+       inkscape:export-ydpi="576"><tspan
+         sodipodi:role="line"
+         id="tspan4110-8-2"
+         x="161.17038"
+         y="-33.526592"
+         style="font-style:normal;fill:#0000ff;stroke-width:0.26458332">predicate<tspan
+   style="font-size:4.12749958px;baseline-shift:sub;stroke-width:0.26458332"
+   id="tspan5050-3">2</tspan></tspan></text>
+    <path
+       style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.39687499;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 114.3,-31.083331 13.49375,9.260416"
+       id="path5074"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="576"
+       inkscape:export-ydpi="576" />
+    <path
+       style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.39687499;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 161.925,-24.733331 10.84792,-6.879166"
+       id="path5076"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="576"
+       inkscape:export-ydpi="576" />
   </g>
 </svg>

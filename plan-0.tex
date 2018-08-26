@@ -1,0 +1,82 @@
+\documentclass[12pt, orivec]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}    % for \rightsquigarrow
+\usepackage{wasysym}	% for frown face
+\usepackage[breakable]{tcolorbox}
+\usepackage{ulem}
+\usepackage{tikz-cd}		% commutative diagrams
+\usepackage{tikz}
+\usepackage{amsthm}
+\usepackage{enumitem}	% for \itemize custom labels
+\usepackage{turnstile}	% longer turnstiles
+\usepackage[backend=biber,bibstyle=authoryear,citestyle=authoryearbrack]{biblatex}
+\bibliography{../AGI-book}
+
+\newtheorem{theorem}{Theorem}
+
+\ifdefined\chinchin
+\usepackage[CJKspace]{xeCJK}
+\setCJKmainfont[BoldFont=SimHei,ItalicFont=AR PL KaitiM GB]{SimSun}
+\newcommand{\cc}[2]{#1}
+\else
+\newcommand{\cc}[2]{#2}
+\fi
+
+\setcounter{secnumdepth}{1}		% use numbers in sections only
+
+\newcommand{\code}[1]{{\footnotesize{\ttfamily #1}}}
+\newcommand{\tab}{\hspace*{2cm}}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcommand{\Chi}{\raisebox{2.5pt}{$\chi$}}
+\newcommand*\KB{\vcenter{\hbox{\includegraphics{../KB-symbol.png}}}}
+\newcommand*\NewSym[2][0.5]{\vcenter{\hbox{\includegraphics[scale=#1]{#2}}}}
+\newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
+\newcommand{\smbox}[1]{\boxed{\footnotesize{\mbox{#1}}}}
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+\newcommand{\Dfrac}[2]{%
+\ooalign{%
+      $\genfrac{}{}{2.9pt}0{\hphantom{#1}}{\hphantom{#2}}$\cr%
+      $\color{white}\genfrac{}{}{1.5pt}0{\hphantom{#1}}{\hphantom{#2}}$\cr%
+      $\color{white}\genfrac{}{}{1pt}0{\color{black}#1}{\color{black}#2}$}}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\interfootnotelinepenalty=10000
+
+\title{Plan C}
+\author{甄景贤}
+
+\begin{document}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.8ex plus0.8ex minus0.8ex}
+
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+
+Starting from this analogy:
+\begin{equation}
+\begin{tikzcd}[column sep = large]
+\mbox{逻辑语法} \arrow[d] \\
+\mbox{partial model} 
+\end{tikzcd}
+\approx
+\begin{tikzcd}[column sep = large]
+\mbox{神经网络 graph re-writer} \arrow[d] \\
+\mbox{graph model}
+\end{tikzcd}
+\end{equation}
+
+The object being optimized is a set of logic formulas, or a model-rewriting function.  This is our domain $D$.  If the function is parametrized then the domain is $\mathbb{R}^n$ and we're back to traditional optimization.
+
+The model space can also be designed.  The most ``geometric'' model may be a set of points and a set of regions defined by micro-NNs.  The model rewriter will look at a local region in the model, which would be some points and some regions.  But the function that acts on this partial model is still ``weird''.
+
+\section{A recap of reinforcement learning}
+
+The crucial step is the Bellman update.
+
+\printbibliography
+
+\end{document}
