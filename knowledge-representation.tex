@@ -9,6 +9,7 @@
 \usepackage{amsthm}
 \usepackage{enumitem}	% for \itemize custom labels
 \usepackage{turnstile}	% longer turnstiles
+\usepackage[sf,bf,big,raggedright,compact]{titlesec}	% change section color to blue
 \usepackage[backend=biber,bibstyle=authoryear,citestyle=authoryearbrack]{biblatex}
 \bibliography{../AGI-book}
 
@@ -24,6 +25,10 @@
 
 \setcounter{secnumdepth}{0}		% no section numbers
 
+\titleformat{\section}[hang]{\bfseries\Large\color{blue}}{\thesection \hspace{10pt}}{0pt}{}
+\titleformat{\subsection}[hang]{\bfseries\large\color{blue}}{\thesubsection \hspace{5pt}}{0pt}{}
+
+\newcommand{\book}[1]{$\NewSym[0.4]{../book-icon.png} \quad$ \parbox{0.9\textwidth}{\footnotesize #1}}
 \newcommand{\code}[1]{{\footnotesize{\ttfamily #1}}}
 \newcommand{\tab}{\hspace*{2cm}}
 \newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
@@ -67,7 +72,16 @@
 \end{equation}
 模型不是唯一的，可以有很多种。
 
-在数理逻辑中，\textbf{模型论} 研究的是 syntax / \textbf{theory} 和 \textbf{model} 之间的 \textbf{对偶}。
+在数理逻辑中，\textbf{模型论} 研究的是 \textbf{syntax} 和 \textbf{model} 之间的 \textbf{对偶}。
+
+最经典的例子是 \textbf{Stone duality}，也是大家熟悉的 ``Venn diagram''：
+\begin{equation}
+P \wedge Q \quad \cong \quad
+\vcenter{\hbox{\includegraphics[scale=0.7]{Venn-diagram-0.png}}}
+\end{equation}
+Stone duality\footnote{Marshall Stone (1903-1989), American mathematician who contributed to real analysis, functional analysis, topology and the study of Boolean algebras.} 指的是 Boolean algebra 和 topological space 之间的对偶。  
+
+Boolean algebra 即\textbf{命题逻辑}，它只关心命题的 真假，例如 P =「北京正在下雨」，但它不能 ``access'' 命题内部的结构，例如「北京」和「雨水」等成分。 强人工智能最关键的障碍 (obstruction)，是命题逻辑到一阶逻辑的跃升 (lifting)。 
 
 First-order logic 的 模型 可以用一些 \textbf{集合} 及其 \textbf{元素} 组成。  例如，\\
 $\mbox{John} \in \mbox{Male}, \quad \mbox{John, Mary} \in \mbox{Mathematician}$： 
@@ -194,14 +208,26 @@ $\vec{x}$ 是系统的\textbf{状态}，$\vec{u}$ 叫 control 或 action。 在 
 \begin{equation}
 \boxed{\mbox{total rewards}} \quad J = \sum_n L(\vec{x}) = \int L dt
 \end{equation}
-$L \in \mathbb{R}$ 是在 $\vec{x}$ 位置得到的\textbf{瞬时奖励}，基於历史上分析力学的原因，$L$ 也叫作 \textbf{Lagrangian}，单位是能量，但注意这里的 $\vec{x}$ 是「思维空间」，不同於物理空间。 我附带写上微分形式，以便於记忆。
+$L \in \mathbb{R}$ 是在 $\vec{x}$ 位置得到的\textbf{瞬时奖励}，基於历史上分析力学的原因，$L$ 也叫作 \textbf{Lagrangian}，单位是能量（但正负号改变，后者量度的是惩罚），但注意这里的 $\vec{x}$ 是「思维空间」，不同於物理空间。 我附带写上微分形式，以便於记忆。
 
 系统的运行如下：
 \begin{equation}
 \vcenter{\hbox{\includegraphics[scale=0.7]{abstract-dynamic-programming.png}}}
 \end{equation}
 % $\vec{x}$ 的某些部分用作\textbf{输出}，经由它得到奖励。 
-$\vec{u}$ 和 $\vec{f}$ 重合，作用是将 $\vec{x}$ \textbf{重写}。 Optimization 作用在 $\Theta$（亦即 $\vec{u}$）之上。  注意 $\vec{u} \in$ 某种 function space，例如是一些 逻辑式子，这和传统的 optimization over $\mathbb{R}$ 很不同。 
+$\vec{u}$ 和 $\vec{f}$ 重合，作用是将 $\vec{x}$ \textbf{重写}：
+\begin{equation}
+\vec{f}(\vec{x},\vec{u}) \equiv \vec{u}(\vec{x})
+\end{equation}
+For example, the logic rule ```失恋 $\Rightarrow$ 不开心'' performs the rewriting of the following sub-graph:
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.6]{heartbreak-precond.png}}}
+\quad \mapsto \quad
+\vcenter{\hbox{\includegraphics[scale=0.6]{heartbreak-postcond.png}}}
+\end{equation}
+This is the \textbf{state transition} $\vec{u}: \vec{x} \mapsto \vec{x}'$, which can also be regarded as the \textbf{logical inference} $\vec{u}: \vec{v} \vdash \vec{x}'$, where $\vec{u}$ is the rewriting function or logic rule.
+
+Optimization of $J$ 作用在 $\Theta$（亦即 $\vec{u}$）之上。  注意 $\vec{u} \in$ 某种 function space or 逻辑式子，这和传统的 optimization over $\mathbb{R}$ 很不同。 
 
 \footnotesize
 在经典 AI 中，$\vec{u}(\vec{x}) = \vec{f}(\vec{x})$ 的作用相当於 deduction $\vec{x} \vdash \vec{x}'$，或者叫 forward-chaining（向前推导出一些逻辑结论）。  在经典 AI 中这工作由 \textbf{逻辑引擎} 负责，它包含 \textbf{unification} (= rule matching) 和 \textbf{resolution} (= proof search) 两个算法。  在我们的框架中 看不到这些运作，因为它们被包含在 $\vec{u}$ 或 $\vec{f}$ 之内。 
@@ -215,7 +241,7 @@ $\vec{u}$ 和 $\vec{f}$ 重合，作用是将 $\vec{x}$ \textbf{重写}。 Optim
 %\end{equation}
 %但现在 $\vdash$ 是根据 $\Theta$ 的 \textbf{逻辑推导}，$e$ 和 $a$ 是逻辑式子的集合。 给定一些前提，可以推出很多结论，其中有些得到奖励或惩罚。 % 在 \textbf{强化学习} (reinforcement learning，亦即 dynamtic programming) 的框架下，训练是根据 \textbf{奖励} 而不是 \textbf{误差}，和上面略有不同。 
 
-分析力学中 Hamiltonian 的定义是：
+对应用数学方面的专家们来说，以下的理论是颇为 standard 的。  分析力学中 Hamiltonian 的定义是：
 \begin{equation}
 H = L + \frac{\partial J}{\partial \vec{x}} \vec{f}
 \end{equation}
@@ -225,19 +251,22 @@ H = L + J ( \vec{f}(\vec{x}) )
 \end{equation}
 Pontryagin\footnote{Lev Pontryagin (1908-1988) Soviet mathematician. Blind since the age of 14, he made major discoveries in a number of fields including algebraic topology and differential topology.} 的 \textbf{极小值原理} 给出最优解的条件是：
 \begin{equation}
-H^* = \inf_u H
+\label{Pontryagin-max-principle}
+H^* = \inf_u H \quad \mbox{or} \quad \nabla_{\vec{u}} H^* := \frac{\partial H^*}{\partial \vec{u}} = 0
 \end{equation}
 可以定义一个作用在 J 上的算子 T：
 \begin{equation}
 T J := \inf_u H
 \end{equation}
-则 Bellman's optimality condition 可以表示为以下的 fixed-point 形式：
+则 Bellman's optimality condition 可以表示为以下的 fixed-point 形式 \parencite{Bertsekas2013}：
 \begin{equation}
 J^* = T J^*
 \end{equation}
-相信应用数学方面的专家们比我更熟悉这些理论..... 据说 Hamilton-Jacobi 方法导致解 偏微分方程，不是特别有效，实践中更有用的是 Pontryagin 极小值原理。 
+据说 Hamilton-Jacobi 方法导致解 偏微分方程，不是特别有效，实践中更有用的是 Pontryagin 极小值原理。
 
-关键是： $\Theta$ 属於的 domain 不是传统的 $\mathbb{R}^n$。 如果想用传统的 基於 differentials 的 optimization 技巧，似乎最低要求是 domain 上的 topology、continuity 和 compactness，然后才可以定义例如 Fr\'{e}chet derivative.
+在 (\ref{Pontryagin-max-principle}) 式中有梯度 $\nabla_{\vec{u}}$，所以如果能对 $\vec{u}$ 求导数是会很有用的。  如果问题是 continuous optimization，可以用 non-smooth analysis，其最低要求是 domain 上有 norm (\textit{ie}, Hilbert space or Banach space)，则可以用 proximal gradient 等方法。 
+
+关键问题是： $\Theta$ 属於的 domain 不是传统的 $\mathbb{R}^n$。
 
 \section{Plan 0: geometric models}
 
@@ -263,7 +292,6 @@ J^* = T J^*
 P(x) \wedge Q(x) \quad \cong \quad
 \vcenter{\hbox{\includegraphics[scale=0.7]{Venn-diagram.png}}}
 \end{equation}
-这是大家熟悉的 Venn diagram，也是 \textbf{Stone duality} 的最经典例子。 Stone\footnote{Marshall Stone (1903-1989), American mathematician who contributed to real analysis, functional analysis, topology and the study of Boolean algebras.} duality 指的是 Boolean algebra 和 topological space 之间的对应。  
 
 这些 geometric ``\textbf{regions}'' 很容易用神经网络做到。 如果 $\vec{F} =$ 神经网络，则：
 \begin{equation}
@@ -286,9 +314,17 @@ P(x) \wedge Q(x) \quad \cong \quad
 \end{eqnarray}
 但我们需要一个 \uline{可以连续变化的} model of set theory，或许可以用某种 fuzzy topology 来达成？  这是我未来会专注的方向。
 
+但这里有个问题： 逻辑上，两个式子之间的 semantic distance 可以定义为由一个式子推导到另一个式子所需的 proof steps 个数（它还取决於 $\KB$ 内的其他式子），但根据 Turing 在 1936 年证明的的 halting problem 定理，这个 distance 是\textbf{不可计算的}，它是 Kolmogorov complexity 的一种形式，它可以被 approximate 但不能完全准确地计算。 换句话说，在逻辑式子的空间上不可能有完全确定的 semantic metric。  我们的 $\vec{u} = \Theta$ 类似於逻辑式子，如果在 $\Theta$ 上能定义 gradient $\nabla_\Theta$，似乎有矛盾。 会不会 \textbf{fuzzy topology} 能做到 semantic metric 的近似？  这取决於 fuzzy geometric model 的 rewriting function space $\Theta$ 是不是 \textbf{metrizable} (\textit{cf} \parencite{Goubault-Larrecq2013}). 暂时我对 geometric model 的结构仍不熟悉，所以无法回答这问题。
+
+% 如果想用传统的 基於 differentials 的 optimization 技巧，似乎最低要求是 domain 上的 topology、continuity 和 compactness，然后才可以定义例如 Fr\'{e}chet derivative. \parencite{Henrot2018}
+
 % 当然，如果改写的能力太弱，则会 ``throw the baby out with the water''，亦即丧失了一阶逻辑的\textbf{泛化}能力。  同时，要从 optimization 的角度考虑，什么形式的改写才最有利於速度。  模型的 representation 也是一个考虑因素： 它应该有某种良好的 \textbf{metric}，这 metric 近似 semantic distance，而不是纯粹基於 logic syntax。 事实上，完美的 semantic metric 是\textbf{不可计算的}，因它是 Kolmogorov complexity.
 
-以下主要分析 plan A 和 B（它们已经是可行的）。
+\begin{center}
+\rule{0.4\textwidth}{.6pt}
+\end{center}
+
+以下主要分析 plan A 和 B（它们已经是可行的）。 Plan A 直接用 discrete optimization，所以不需要 metric space。  Plan B 用神经网络，它的 weights $\in \mathbb{R}$ 是连续空间，但这神经网络是作用在 graph 上，后者仍然是离散结构。
 
 \section{Plan A: genetic algorithm}
 \label{COCO}
@@ -492,7 +528,7 @@ $\in$ 很容易用神经网络解决，例如可以定义 $\heartsuit$ 为一个
 \begin{equation}
 \boxed{\mbox{graph}} \quad
 \begin{tikzcd}[column sep = large]
-\NewSym[1.5]{../graph-symbol.png} \ar[r, hookrightarrow, "\mbox{embed}"] & (x_1, ..., x_n) 
+\NewSym[1.5]{../graph-symbol.png} \ar[r, hookrightarrow, "\mbox{embed}"] & (x_1, ..., x_m) 
 \end{tikzcd}
 \quad \boxed{\mbox{vector}}
 \end{equation}
@@ -516,19 +552,27 @@ V_1 \arrow[r, bend left, "M_1"] & \arrow[l, bend left, "M_2"] V_2
 每个 quiver 定义一个 path algebra，它的元素是 quiver 里的 path，换句话说即是逻辑上的 \textbf{关系} 及其 compositions。 暂时不知道 quiver representations 在 AI 里有什么用。
 \end{tcolorbox}
 
-解决办法： 现时 在 自然语言理解 方面 最强的深度学习模型，据我所知是基於 CNN 或 RNN 的模型，而它们处理的是线性的 sequence 输入。 所以要将 memory graph 分拆成线性的元素（亦即个别的 关系／命题），而且里面不可以用 global variable references（换句话说，已经进行了 variable matching 处理）。  然后 NN 输出的 variable copying 也是 externally 处理的。 换句话说，用 ``hybrid'' 的方式，结合 NN 和 \textbf{graph rewriting}。
+整体运作是这样的：
+\begin{equation}
+\vcenter{\hbox{\includegraphics[scale=0.6]{graph-NN-rewriting.png}}}
+\end{equation}
+这 deep NN 可以是 CNN 或 RNN，因为它们现时 在 自然语言理解／翻译 方面 很成功，但它们处理的是线性的 sequence 输入。 或者可以将 memory sub-graph 分拆成线性的元素（亦即个别的 关系／命题），而且里面不可以用 global variable references（换句话说，已经进行了 variable matching 处理）。  然后 NN 输出的 variable copying 也是 externally 处理的。 换句话说，用 ``hybrid'' 的方式，结合 NN 和 \textbf{graph rewriting}。  图中那 embedding 细节目前我仍未见过良好的解决办法，但 DeepMind / Google 他们的研究已经很接近了。
 
-注意： 虽然 NN 的参数空间 $\Theta$ 是 \textbf{连续}的，但它 learn 出来的 rewriting rules 却是 \textbf{离散}的，因为 graph 本身是个 离散结构。 
+注意： 虽然 NN 的参数空间 $\Theta \in \mathbb{R}^N$ 是 \textbf{连续}的，但它 learn 出来的 rewriting rules 却是 \textbf{离散}的，因为 graph 本身是个 离散结构。 
 
 补充一点： attention mechanism 要 traverse memory graph，换句话说是一种 graph search algorithm，这部分可以和 NN 结合成同一个 module（现时有很多 RNN architectures 就是这样）。
 
+\begin{center}
+\rule{0.4\textwidth}{.6pt}
+\end{center}
 馀下 2 节是一些 数学 背景知识....
-\hrule
 
 \section{Categorical semantics}
 \label{Categorical-semantics}
 
-Categorical semantics 是用 category theory 表达的 model theory。  以下内容主要来自 \parencite{Caramello2018} 这本新书的第一章。  更经典的参考书是 \parencite{Goldblatt2006}. 
+Categorical semantics 是用 category theory 表达的 model theory。
+
+\book{以下内容主要来自 \parencite{Caramello2018} 这本新书的第一章。  更经典的参考书是 \parencite{Goldblatt2006}.  范畴论最好的入门书当然是「中学生也能看懂的」\textit{Conceptual mathematics} \parencite{Lawvere1997} 还有 \parencite{Lawvere2003}.}
 
 不同的 logics 可以透过 \textbf{proof theory}（它研究的是 \textit{syntactic} rules of deduction）定义：
 \begin{equation}
@@ -595,11 +639,13 @@ Boolean coherent categories		& first-order classical logic \\
 
 \uline{Topos 可以理解为 set theory 受范畴论影响下的一种推广}。 每个 elementary topos\footnote{Elementary 是集合中「元素」的意思} 有一个 \textbf{sub-object classifier} $\Omega$.  $\Omega$ 是一个特殊的 object，例如 $\{ \top, \bot \}$，代表 \textbf{真 假} 二值。 用 $\Omega$ 可以定义 sub-objects 亦即集合论中的 \textbf{子集} 概念。  举例来说，``Love'' 是一个在 $D \times D$ 内的 \textbf{关系}，$D$ 是所有「人」的集合。  可以将 $D \times D$ 看成是 full relation，则 $\mbox{Love} \subset D \times D$ 是它的\textbf{子集}。  换句话说，这是 elementary topos 可以用来做 relation algebra 或 first-order logic 的 \textbf{模型} 的原因。 （参见 \parencite{Goldblatt2006}）
 
+「\textit{Lawvere 和 Tierney 发展的 elementary topoi 理论\footnote{around 1960-70}，是 categorical algebra 历史上最重要的事件.....  这不只是他们证明了这些东西，而是他们敢於相信这是可能的}」--- Peter Freyd.
+
 一些历史： 在 1963 年左右，topos 的概念独立地来自几个不同的发源地： Alexander Grothendieck 在代数几何方面发展的 sheaf theory，和 F William Lawvere 用范畴论重新表述集合论，还有 Paul Cohen 的 forcing 理论（后者用来解决 \textbf{连续统假设}）。  Sheaf 的意思是： 在一些 open sets $V_i$ 上定义的物体，它们在 overlap $V_i \cap V_j$ 上是吻合的，即可以 ``collate''，情形就像微分几何里一些 charts 拼合成 atlas。  二战后，Leray，接著 Cartan，用 open sets 的方法定义了 sheaf。 其后 Lazard 用 \'{e}tale 定义 sheaf，后者是 topos 理论的主要动机。  例如，一个范畴 $\mathcal{A}$ 上的 pre-sheaf 可以定义为一个 \textbf{functor}:
 \begin{equation}
-\mathcal{A}^{\mathrm{op}} \rightarrow \mathbf{Set}
+\widehat{\mathcal{A}}: \mathcal{A}^{\mathrm{op}} \rightarrow \mathbf{Set}
 \end{equation}
-Grothendieck 将 sheaf 应用在 topology (cohomology)上，而后 Jean-Pierre Serre 发现它也可以用在代数几何上，他们和其他合作者 写了 1623 页的巨著 《SGA IV》，重大影响了代数几何的发展，导致 1974 年 Deligne 解决了 Weyl 猜想。  但我暂时不熟悉代数几何，所以不太清楚 Grothendieck 他们做了什么.... 详细可参看 \parencite{MacLane1992} 一书。
+亦即是 范畴 $\mathcal{A}$ 上的一「层」set-valued functions.  它是 ``functor'' 所以处理了那些 collating.  这个 functor 是 contravarient 所以有 $\mathrm{op}$.  Grothendieck 将 sheaf 应用在 topology (cohomology)上，而后 Jean-Pierre Serre 发现它也可以用在代数几何上，他们和其他合作者 写了 1623 页的巨著 《SGA IV》，重大影响了代数几何的发展，导致 1974 年 Deligne 解决了 Weyl 猜想。  但我暂时不熟悉代数几何，所以不太清楚 Grothendieck 他们做了什么.... 详细可参看 \parencite{MacLane1992} 一书。
 
 在拓樸空间上，一个 open set $U$ 的 complement 是 closed 而且未必 open，所以如果局限在 open sets 之内，则 $U$ 的 ``negation'' 应该定义为 ``the interior of its complement''.  这导致 $U$ 的「\textbf{双重否定}」不一定等於 $U$，换句话说，\uline{the algebra of open sets follows \textbf{intuitionistic logic}}, such an algebra is called a \textbf{Heyting algebra}.  （参考书同上）
 
@@ -614,7 +660,7 @@ Topoi 之间有两种 morphisms： \textbf{geometric morphisms} 和 \textbf{logi
 
 $\lambda$-calculus 和 combinatory logic 都是可以表达任意 \textbf{函数} 的形式。 如果全体函数的 domain 是 $D$，而 由 $D \rightarrow D$ 的函数的个数是 $|D^D|$，则根据集合论的 Cantor's theorem，$|D^D|$ 必定大於 $|D|$，即使 $D$ 是无穷依然成立。 换句话说，$\lambda$-calculus 和 combinatory logic 不可能有 models。  这结论是非常令人不安的。 但在 1971 年，这个问题被 Dana Scott 和 C Strachey 解决了，开创了 \textbf{domain theory}。
 
-以下内容主要来自 \parencite{Vickers1989}，是一本很易懂的书，还有更新和更详尽的 \parencite{Goubault-Larrecq2013}.
+\book{以下内容主要来自 \parencite{Vickers1989}，是一本很易懂的书，还有更新和更详尽的 \parencite{Goubault-Larrecq2013}.}
 
 Scott 的解决办法是给 domain $D$ \uline{endow with a \textbf{Scott topology}，然后只考虑 $D \rightarrow D$ 的}\textbf{\uline{连续函数}}。 后者的数量较少，所以避开了 Cantor 勃论。 
 
