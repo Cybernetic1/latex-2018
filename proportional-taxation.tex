@@ -1,0 +1,90 @@
+\documentclass[12pt, orivec]{article}
+\usepackage[no-math]{fontspec}
+\usepackage{amsmath}
+\usepackage{amssymb}    % for \rightsquigarrow
+\usepackage{wasysym}	% for frown face
+% \usepackage[many]{tcolorbox}
+\usepackage{ulem}
+\usepackage{tikz-cd}		% commutative diagrams
+\usepackage{tikz}
+\usepackage{amsthm}
+\usepackage{enumitem}	% for \itemize custom labels
+\usepackage{turnstile}	% longer turnstiles
+\usepackage[sf,bf,big,raggedright,compact]{titlesec}	% change section color to blue
+\usepackage[backend=biber,bibstyle=authoryear]{biblatex}
+\bibliography{../AGI-book}
+
+\ifdefined\chinchin
+\setromanfont{FreeSans}
+\usepackage[CJKspace]{xeCJK}
+\setCJKmainfont[FallBack, BoldFont=Noto Sans CJK SC Medium, ItalicFont=AR PL KaitiM GB]{Noto Sans CJK SC Light}
+\newcommand{\cc}[2]{#1}
+\else
+\setromanfont{Ubuntu}
+\newcommand{\cc}[2]{#2}
+\fi
+
+\newtheorem{theorem}{Theorem}
+
+\setcounter{secnumdepth}{0}		% no section numbers
+
+\titleformat{\section}[hang]{\Large\color{blue}}{\thesection \hspace{10pt}}{0pt}{}
+\titleformat{\subsection}[hang]{\large\color{blue}}{\thesubsection \hspace{5pt}}{0pt}{}
+
+\newcommand{\book}[1]{$\NewSym[0.4]{../book-icon.png} \quad$ \parbox{0.9\textwidth}{\footnotesize #1}}
+\newcommand{\code}[1]{{\footnotesize{\ttfamily #1}}}
+\newcommand{\tab}{\hspace*{2cm}}
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcommand{\Chi}{\raisebox{2.5pt}{$\chi$}}
+\newcommand*\KB{\vcenter{\hbox{\includegraphics{../KB-symbol.png}}}}
+\newcommand*\NewSym[2][0.5]{\vcenter{\hbox{\includegraphics[scale=#1]{#2}}}}
+\newcommand*\sigmoid{\vcenter{\hbox{\includegraphics{sigmoid.png}}}}
+\newcommand{\smbox}[1]{\boxed{\footnotesize{\mbox{#1}}}}
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+\newcommand{\Dfrac}[2]{%
+	\ooalign{%
+		$\genfrac{}{}{2.9pt}0{\hphantom{#1}}{\hphantom{#2}}$\cr%
+		$\color{white}\genfrac{}{}{1.5pt}0{\hphantom{#1}}{\hphantom{#2}}$\cr%
+		$\color{white}\genfrac{}{}{1pt}0{\color{black}#1}{\color{black}#2}$}}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\interfootnotelinepenalty=10000
+
+\title{\color{blue} Representation $\propto$ Texation}
+% \author{\cc{甄景贤}{YKY}}
+
+\begin{document}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.8ex plus0.8ex minus0.8ex}
+
+\maketitle
+
+%\begin{abstract}
+%\end{abstract}
+
+可以用所交的税来做加权。 
+
+美国独立战争时期已经有 ``no taxation without representation'' 的说法，现在或者可以提出
+\begin{equation}
+\mbox{representation} \propto \mbox{taxation}
+\end{equation}
+
+政府其实就是一班交税的人合资来做的一些工程项目，很应该由交税的人集体决定怎样用那些政府收益
+
+\section{\cc{对数 修正 (logarithmic adjustment)}{Logarithmic adjustment}}
+
+根据统计数字显示，财富在社会中的分布普遍是 \textbf{对数正态分布} (log normal) 的形式。 换句话说，将财富的数值 take log 之后，其分布即为大家熟悉的 \textbf{正态分布} (normal distribution)。
+
+自然界中很多现象，例如人的高矮肥瘦，都是呈现正态分布的。 
+
+所以我们提议，每个人投票的 \textbf{权重} 可以用 \textbf{对数} (log) 修正。
+
+举例来说，我的个人资产总值大约是 HK\$ 3M，而 香港首富 李嘉诚 的资产总值 是 US\$ 38B.
+
+未修正前，他的财富是我的 \textbf{10万倍}，但在修正后，他和我的 对数财富 比率 变成只有 \textbf{1.77 : 1}.
+
+\printbibliography
+
+\end{document}
