@@ -662,6 +662,16 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c8d9f7;fill-opacity:1;stroke:#000000;stroke-width:1.875;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect281"
+       width="82.5"
+       height="75"
+       x="433.125"
+       y="1151.7372"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192" />
     <g
        transform="translate(-39,-153.24999)"
        id="g3493"
@@ -1978,7 +1988,7 @@
        inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13287-6-6)"
-       d="m 492.26949,1143.8361 c 0,0 13.01721,-33.1048 -23.06249,-32.0625 -37.23653,1.0757 -24.93751,33.0625 -24.93751,33.0625"
+       d="m 499.76949,1143.8361 c 0,0 13.01721,-33.1048 -23.06249,-32.0625 -37.23653,1.0757 -24.93751,33.0625 -24.93751,33.0625"
        id="path3884-9-0-1-7-7-7"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="csc"
@@ -1987,7 +1997,7 @@
        inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png" />
     <g
        id="g12499-2-2"
-       transform="translate(125.2725,247.27089)"
+       transform="translate(138.3975,247.27089)"
        inkscape:export-xdpi="192"
        inkscape:export-ydpi="192"
        inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"
@@ -2029,7 +2039,7 @@
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker16740-3-7)"
-       d="m 509.37438,1192.3215 44,-1"
+       d="m 522.49938,1192.3215 44,-1"
        id="path7055-1-6-3-3-3-7"
        inkscape:connector-curvature="0"
        inkscape:export-xdpi="192"
@@ -2132,8 +2142,8 @@
          style="font-size:25.00000572px;line-height:1.25;stroke-width:1px">,</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="467.8125"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.00000007px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375;"
+       x="475.3125"
        y="1181.7372"
        id="text391"
        inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"
@@ -2141,17 +2151,17 @@
        inkscape:export-ydpi="192"><tspan
          sodipodi:role="line"
          id="tspan389"
-         x="467.8125"
+         x="475.3125"
          y="1181.7372"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30px;font-family:'Alibaba Sans';-inkscape-font-specification:'Alibaba Sans Bold';stroke-width:0.9375">BERT</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.00000007px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr;text-anchor:middle;stroke-width:0.9375;">BERT</tspan><tspan
          sodipodi:role="line"
-         x="467.8125"
-         y="1219.2372"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30px;font-family:'Alibaba Sans';-inkscape-font-specification:'Alibaba Sans Bold';stroke-width:0.9375"
+         x="475.3125"
+         y="1216.1122"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.00000007px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr;text-anchor:middle;stroke-width:0.9375;"
          id="tspan558">/GPT</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:1.25;font-family:'Alibaba Sans';-inkscape-font-specification:'Alibaba Sans';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.00000007px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375;"
        x="253.125"
        y="1144.2372"
        id="text395"
@@ -2162,7 +2172,7 @@
          id="tspan393"
          x="253.125"
          y="1144.2372"
-         style="stroke-width:0.9375;font-size:27.50000007px">seq of seq</tspan></text>
+         style="stroke-width:0.9375;font-size:25.00000007px;-inkscape-font-specification:'Times New Roman, Normal';font-family:'Times New Roman';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:middle;text-align:center;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;">seq of seq</tspan></text>
     <g
        transform="matrix(0,-0.9375,1.2284984,0,-129.69402,1657.9425)"
        inkscape:label="Layer 1"
