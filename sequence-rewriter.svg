@@ -15,8 +15,8 @@
    viewBox="0 0 744.09448819 1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="squence-rewiter.svg">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="sequence-rewriter.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,15 +25,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="354.42076"
-     inkscape:cy="475"
+     inkscape:cx="396.85039"
+     inkscape:cy="115"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1050"
-     inkscape:window-height="1653"
+     inkscape:window-width="1920"
+     inkscape:window-height="1055"
      inkscape:window-x="0"
-     inkscape:window-y="2"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:snap-nodes="false"
      inkscape:snap-global="true"
@@ -388,6 +388,262 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          d="M 0,0 5,-5 -12.5,0 5,5 Z"
          id="path13289-2-4" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker16740-3-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path16742-6-5" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13287-6-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13289-2-2" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13459-9-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13461-1-1" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3909"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3879"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3903"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-8"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3885"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-2"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-9"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-1"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-94"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-8"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-4"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-0"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-3"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-10"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-6"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-06"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-1"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend-4"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3897-7"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2MendS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2MendS"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7051"
+         style="fill:#0000ff;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2MendSG"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2MendSG"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7329"
+         style="fill:#ff0000;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2MendSGT"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2MendSGT"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4633"
+         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
     </marker>
   </defs>
   <metadata
@@ -1673,5 +1929,258 @@
          x="478.125"
          y="1011.1122"
          style="stroke-width:0.9375">symmetric</tspan></text>
+    <g
+       id="g12494-2-2"
+       transform="translate(89.647499,244.5209)"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"
+       style="stroke:#ff0000">
+      <rect
+         inkscape:tile-y0="239.8622"
+         inkscape:tile-x0="199.5"
+         ry="0"
+         y="939.73871"
+         x="161.08"
+         height="22.200001"
+         width="22.200001"
+         id="use3438-2-4-7-7"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:0.25882353;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.8745098;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+      <rect
+         inkscape:tile-y0="239.8622"
+         inkscape:tile-x0="199.5"
+         ry="0"
+         y="939.73871"
+         x="183.16"
+         height="22.200001"
+         width="22.200001"
+         id="use3440-2-8-0-0"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:0.25882353;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.8745098;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+      <rect
+         inkscape:tile-y0="239.8622"
+         inkscape:tile-x0="199.5"
+         ry="0"
+         y="939.73871"
+         x="205.24001"
+         height="22.200001"
+         width="22.200001"
+         id="use3442-5-2-9-9"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:0.25882353;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.8745098;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13459-9-9)"
+       d="m 376.24688,1193.6653 44.00001,-1"
+       id="path7055-1-3-3-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13287-6-6)"
+       d="m 492.26949,1143.8361 c 0,0 13.01721,-33.1048 -23.06249,-32.0625 -37.23653,1.0757 -24.93751,33.0625 -24.93751,33.0625"
+       id="path3884-9-0-1-7-7-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csc"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png" />
+    <g
+       id="g12499-2-2"
+       transform="translate(125.2725,247.27089)"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"
+       style="stroke:#ff0000">
+      <rect
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:0.25882353;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.8745098;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         id="rect3336-9-8-3-0-0"
+         width="22.200001"
+         height="22.200001"
+         x="442.56"
+         y="934.73871"
+         ry="0"
+         inkscape:tile-cx="219.5"
+         inkscape:tile-cy="259.8622"
+         inkscape:tile-w="40"
+         inkscape:tile-h="40"
+         inkscape:tile-x0="199.5"
+         inkscape:tile-y0="239.8622" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#rect3336-9-8-3-0-0"
+         xlink:href="#rect3336-9-8-3-0-0"
+         transform="translate(22.08)"
+         id="use3432-0-6-9-2-2"
+         style="stroke:#ff0000" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#rect3336-9-8-3-0-0"
+         xlink:href="#rect3336-9-8-3-0-0"
+         transform="translate(44.16)"
+         id="use3434-0-6-0-3-3"
+         style="stroke:#ff0000" />
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker16740-3-7)"
+       d="m 509.37438,1192.3215 44,-1"
+       id="path7055-1-6-3-3-3-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png" />
+    <g
+       id="g17663-6-3"
+       transform="translate(111.6475,354.52089)"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"
+       style="stroke:#ff0000">
+      <rect
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:0.25882353;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.8745098;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         id="rect3336-9-7-1-6"
+         width="22.200001"
+         height="22.200001"
+         x="26.66"
+         y="829.26221"
+         ry="0"
+         inkscape:tile-cx="219.5"
+         inkscape:tile-cy="259.8622"
+         inkscape:tile-w="40"
+         inkscape:tile-h="40"
+         inkscape:tile-x0="199.5"
+         inkscape:tile-y0="239.8622" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#rect3336-9-7-1-6"
+         xlink:href="#rect3336-9-7-1-6"
+         transform="translate(22.08)"
+         id="use3432-0-0-2-1"
+         style="stroke:#ff0000" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#rect3336-9-7-1-6"
+         xlink:href="#rect3336-9-7-1-6"
+         transform="translate(44.16)"
+         id="use3434-0-1-9-2"
+         style="stroke:#ff0000" />
+      <use
+         height="100%"
+         width="100%"
+         x="0"
+         y="0"
+         inkscape:tiled-clone-of="#rect3336-9-7-1-6"
+         xlink:href="#rect3336-9-7-1-6"
+         transform="translate(66.24)"
+         id="use3436-8-1-3-9"
+         style="stroke:#ff0000" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="234.64752"
+       y="1195.8832"
+       id="text17669-1-3"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"><tspan
+         sodipodi:role="line"
+         id="tspan17671-9-1"
+         x="234.64752"
+         y="1195.8832"
+         style="font-size:25.00000381px;line-height:1.25;stroke-width:1px">,</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="341.39752"
+       y="1195.8832"
+       id="text17673-4-9"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"><tspan
+         sodipodi:role="line"
+         id="tspan17675-7-4"
+         x="341.39752"
+         y="1195.8832"
+         style="font-size:25.00000381px;line-height:1.25;stroke-width:1px">....</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="328.39752"
+       y="1195.8832"
+       id="text17669-1-3-5"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"><tspan
+         sodipodi:role="line"
+         id="tspan17671-9-1-0"
+         x="328.39752"
+         y="1195.8832"
+         style="font-size:25.00000572px;line-height:1.25;stroke-width:1px">,</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="467.8125"
+       y="1181.7372"
+       id="text391"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"><tspan
+         sodipodi:role="line"
+         id="tspan389"
+         x="467.8125"
+         y="1181.7372"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30px;font-family:'Alibaba Sans';-inkscape-font-specification:'Alibaba Sans Bold';stroke-width:0.9375">BERT</tspan><tspan
+         sodipodi:role="line"
+         x="467.8125"
+         y="1219.2372"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30px;font-family:'Alibaba Sans';-inkscape-font-specification:'Alibaba Sans Bold';stroke-width:0.9375"
+         id="tspan558">/GPT</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:1.25;font-family:'Alibaba Sans';-inkscape-font-specification:'Alibaba Sans';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="253.125"
+       y="1144.2372"
+       id="text395"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"><tspan
+         sodipodi:role="line"
+         id="tspan393"
+         x="253.125"
+         y="1144.2372"
+         style="stroke-width:0.9375;font-size:27.50000007px">seq of seq</tspan></text>
+    <g
+       transform="matrix(0,-0.9375,1.2284984,0,-129.69402,1657.9425)"
+       inkscape:label="Layer 1"
+       id="layer1-0"
+       inkscape:export-filename="/home/yky/latex/2021/seq-seq-2-seq-with-BERT.png"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192">
+      <g
+         transform="matrix(-0.20634921,0,0,0.72265114,552.39489,120.67011)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;line-height:125%;font-family:'Latin Modern Math';-inkscape-font-specification:'Latin Modern Math';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#4d4d4d;fill-opacity:1;stroke:none"
+         id="flowRoot6939">
+        <path
+           d="m 179.75619,399.02851 c -15.8381,-5.04692 -26.11059,-15.1561 -29.93864,-38.59417 l -8.38841,-51.35994 c -4.70025,-28.77839 -20.93109,-36.8129 -38.58668,-43.04735 17.13631,-5.93755 34.62022,-14.26491 38.58668,-40.37544 l 8.38841,-55.21935 c 3.56081,-23.44013 13.58126,-32.65661 29.93864,-38.89105 -15.8381,0.29687 -15.23894,2.37503 -21.21069,7.71883 -7.26995,6.8282 -16.28422,18.11981 -19.03371,36.21915 l -8.38841,55.21935 c -3.2453,21.36315 -29.57913,29.39096 -44.897963,35.32851 16.097753,5.93757 40.906253,12.48534 44.897963,36.21915 l 8.38841,49.87555 c 3.44286,20.47041 11.50412,32.06286 18.25478,38.89105 5.71211,5.64068 5.11295,7.71883 21.98962,8.01571"
+           style="font-size:300px;font-family:'TeX Gyre Pagella';-inkscape-font-specification:'TeX Gyre Pagella';fill:#4d4d4d;stroke:none"
+           id="path7003"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="csscssccsscsscc" />
+      </g>
+    </g>
   </g>
 </svg>
